@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
 
 namespace FoodApp.Server.Configuration
 {
@@ -38,6 +40,7 @@ namespace FoodApp.Server.Configuration
                     .AddEntityFrameworkStores<DataContext>();
 
             services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
                 .AddApiAuthorization<ApplicationUser, DataContext>();
 
             services.AddAuthentication()
