@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodApp.Core", "Core\FoodAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodApp.Data", "FoodApp.Data\FoodApp.Data.csproj", "{B114F076-00E6-4CFB-9CEB-8EDA9562EB9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.FoodApp", "Tests.FoodApp\Tests.FoodApp.csproj", "{71A4334D-F533-4821-ACE1-F8A4EBB13FB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B114F076-00E6-4CFB-9CEB-8EDA9562EB9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B114F076-00E6-4CFB-9CEB-8EDA9562EB9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B114F076-00E6-4CFB-9CEB-8EDA9562EB9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71A4334D-F533-4821-ACE1-F8A4EBB13FB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A4334D-F533-4821-ACE1-F8A4EBB13FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A4334D-F533-4821-ACE1-F8A4EBB13FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A4334D-F533-4821-ACE1-F8A4EBB13FB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
