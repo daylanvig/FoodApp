@@ -2,12 +2,8 @@
 using FoodApp.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FoodApp.Server.Configuration
 {
@@ -22,12 +18,14 @@ namespace FoodApp.Server.Configuration
         {
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseMySql(configuration.GetConnectionString("Default"), ServerVersion.FromString("8.0.17"), o => o.MigrationsAssembly(typeof(DataContext).Assembly.FullName));
-                options
+                options.UseMySql(
+                    configuration.GetConnectionString("Default"), 
+                    ServerVersion.FromString("8.0.17"), 
+                    o => o.MigrationsAssembly(typeof(DataContext).Assembly.FullName)
+                    )
                     .EnableDetailedErrors()
                     .EnableSensitiveDataLogging();
             });
-
 
             ConfigureIdentity(services);
 

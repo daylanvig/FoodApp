@@ -12,8 +12,8 @@ namespace FoodApp.Server.Configuration
         public DataContext CreateDbContext(string[] args)
         {
             IConfiguration configuration = AppConfigurationBuilder
-                                        .GetConfigurationBuilder()
-                                        .Build();
+                                            .GetConfigurationBuilder()
+                                            .Build();
 
             IOptions<OperationalStoreOptions> options = Options.Create(new OperationalStoreOptions());
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>()

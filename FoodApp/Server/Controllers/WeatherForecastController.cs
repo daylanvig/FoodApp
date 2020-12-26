@@ -1,4 +1,5 @@
-﻿using FoodApp.Shared;
+﻿using FoodApp.Data;
+using FoodApp.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
