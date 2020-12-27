@@ -13,9 +13,8 @@ namespace FoodApp.Server.Configuration
         {
             return new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
-            // todo -> add user secrets when needed
-            // .AddUserSecrets(typeof(Program).Assembly);
+                .AddJsonFile("appsettings.json")
+                .AddUserSecrets(typeof(Program).Assembly);
         }
     }
 }

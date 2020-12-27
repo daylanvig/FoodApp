@@ -3,17 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30803.129
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodApp.Server", "FoodApp\Server\FoodApp.Server.csproj", "{984D602F-34F5-4A44-B270-58A0479E413C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodApp.Server", "FoodApp\Server\FoodApp.Server.csproj", "{984D602F-34F5-4A44-B270-58A0479E413C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodApp.Client", "FoodApp\Client\FoodApp.Client.csproj", "{69A9DC18-7200-4E9C-8F66-11EFDF261A25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodApp.Client", "FoodApp\Client\FoodApp.Client.csproj", "{69A9DC18-7200-4E9C-8F66-11EFDF261A25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodApp.Shared", "FoodApp\Shared\FoodApp.Shared.csproj", "{8B6D0D97-3A1F-44E5-A9B9-50D10824D545}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodApp.Shared", "FoodApp\Shared\FoodApp.Shared.csproj", "{8B6D0D97-3A1F-44E5-A9B9-50D10824D545}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodApp.Core", "Core\FoodApp.Core.csproj", "{15C0F2CC-8E08-4B8D-ADE0-45A22E08C806}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodApp.Core", "Core\FoodApp.Core.csproj", "{15C0F2CC-8E08-4B8D-ADE0-45A22E08C806}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodApp.Data", "FoodApp.Data\FoodApp.Data.csproj", "{B114F076-00E6-4CFB-9CEB-8EDA9562EB9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodApp.Data", "FoodApp.Data\FoodApp.Data.csproj", "{B114F076-00E6-4CFB-9CEB-8EDA9562EB9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.FoodApp", "Tests.FoodApp\Tests.FoodApp.csproj", "{71A4334D-F533-4821-ACE1-F8A4EBB13FB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.FoodApp", "Tests.FoodApp\Tests.FoodApp.csproj", "{71A4334D-F533-4821-ACE1-F8A4EBB13FB1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodApp.Services", "FoodApp.Services\FoodApp.Services.csproj", "{131DAC17-2315-40C5-AEAB-313A1E2DFEC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Acceptance.FoodApp", "Tests.Acceptance.FoodApp\Tests.Acceptance.FoodApp.csproj", "{17ED6806-F0EE-4C22-AE12-D2403D3300D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{71A4334D-F533-4821-ACE1-F8A4EBB13FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71A4334D-F533-4821-ACE1-F8A4EBB13FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71A4334D-F533-4821-ACE1-F8A4EBB13FB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{131DAC17-2315-40C5-AEAB-313A1E2DFEC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{131DAC17-2315-40C5-AEAB-313A1E2DFEC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{131DAC17-2315-40C5-AEAB-313A1E2DFEC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{131DAC17-2315-40C5-AEAB-313A1E2DFEC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17ED6806-F0EE-4C22-AE12-D2403D3300D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17ED6806-F0EE-4C22-AE12-D2403D3300D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17ED6806-F0EE-4C22-AE12-D2403D3300D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17ED6806-F0EE-4C22-AE12-D2403D3300D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

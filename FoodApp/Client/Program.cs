@@ -1,4 +1,5 @@
 using FoodApp.Client.Configuration;
+using FoodApp.Client.Services.System;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +22,8 @@ namespace FoodApp.Client
                             .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("FoodApp.ServerAPI"));
-            builder.Services.AddApiAuthorization();
+            builder.Services.AddApiAuthorization()
+                    .AddAccountClaimsPrincipalFactory<CustomUserFactory>();
             builder.Services.AddAppServices();
             await builder.Build().RunAsync();
         }

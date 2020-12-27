@@ -14,6 +14,8 @@
     <PackageReference Include="AutoFixture" Version="4.15.0" />
     <PackageReference Include="AutoFixture.AutoMoq" Version="4.15.0" />
     <PackageReference Include="AutoFixture.Xunit2" Version="4.15.0" />
+    <PackageReference Include="EfCore.TestSupport" Version="5.0.0-preview006" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="xunit" Version="2.4.1" />

@@ -8,6 +8,7 @@ namespace FoodApp.Server.Configuration
         {
             if (isDevelopment)
             {
+                app.UseMiniProfiler();
                 ConfigureDevelopment(app);
             }
             else

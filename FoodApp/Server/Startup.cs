@@ -1,9 +1,11 @@
 using FoodApp.Server.Configuration;
+using FoodApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StackExchange.Profiling;
 
 namespace FoodApp.Server
 {
@@ -19,6 +21,9 @@ namespace FoodApp.Server
         public void ConfigureServices(IServiceCollection services)
         {
             ServiceConfiguration.ConfigureServices(services, Configuration);
+            services.AddMiniProfiler()
+                    .AddEntityFramework();
+            services.AddFoodAppServices();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
