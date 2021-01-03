@@ -1,15 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FoodApp.Client.Services.System
 {
-    public interface IApiRequestService
-    {
-        Task<T> GetFromJsonAsync<T>(string url);
-    }
-
     public class ApiRequestService : IApiRequestService
     {
         private readonly HttpClient _client;
@@ -19,7 +15,13 @@ namespace FoodApp.Client.Services.System
             _client = client;
         }
 
-        public async Task<T> GetFromJsonAsync<T>(string url)
+
+        public Task<T> GetFromJsonAsync<T>(string url)
+        {
+            return _client.GetFromJsonAsync<T>(url);
+        }
+
+        public async Task<T> GetFromJsonOrNavigateAsync<T>(string url)
         {
             T result;
             try
@@ -33,6 +35,20 @@ namespace FoodApp.Client.Services.System
             }
 
             return result;
+        }
+
+        public async Task PostJsonAsync<TModel>(string url, TModel model)
+        {
+            var result = await _client.PostAsJsonAsync<TModel>(url, model);
+            result.EnsureSuccessStatusCode();
+        }
+
+        public async Task<TReturnType> PostJsonAsync<TModel, TReturnType>(string url, TModel model)
+        {
+            var result = await _client.PostAsJsonAsync<TModel>(url, model);
+            result.EnsureSuccessStatusCode();
+            var content = await result.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<TReturnType>(content);
         }
     }
 }

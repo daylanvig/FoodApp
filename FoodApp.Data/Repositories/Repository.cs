@@ -14,10 +14,10 @@ namespace FoodApp.Data.Repositories
     /// Generic repository
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    public class Repository<TEntity> where TEntity : BaseEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         private readonly IDataContext _database;
-        private readonly IQueryable<TEntity> _table;
+        private readonly DbSet<TEntity> _table;
 
         public Repository(IDataContext database)
         {
@@ -25,9 +25,20 @@ namespace FoodApp.Data.Repositories
             _table = _database.Set<TEntity>();
         }
 
+        public async Task<int> AddAsync(TEntity entity)
+        {
+            _table.Add(entity);
+            return await _database.SaveChangesAsync();
+        }
+
         public Task<TEntity> GetByIdAsync(int id)
         {
             return _table.SingleOrDefaultAsync(e => e.Id == id);
+        }
+
+        public Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> whereCondition)
+        {
+            return _table.SingleOrDefaultAsync(whereCondition);
         }
 
         public async Task<IReadOnlyList<TEntity>> ToListAsync(Expression<Func<TEntity, bool>> whereCondition = null)

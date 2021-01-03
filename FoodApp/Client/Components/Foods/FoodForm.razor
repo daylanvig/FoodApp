@@ -1,0 +1,25 @@
+﻿@inherits FoodFormBase
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <MudForm @ref="form" id="Food_Form">
+        @if (food.Id == 0)
+        {
+            <h2>Add New Food</h2>
+        }
+        else
+        {
+            <h2>Edit @food.Name</h2>
+        }
+        <section aria-label="Food Form">
+            <MudTextField T="string" Label="Name" Required="true" @bind-Value="food.Name" name="Food.Name" />
+            <div>
+                <MudTextField T="decimal?" Label="On Hand" Required="true" @bind-Value="food.AmountOnHand" name="Food.AmountOnHand" />
+                @*TODO: Replace this with an auto complete dropdown component*@
+                <MudTextField Label="Units" Required="true" @bind-Value="food.QuantityType" name="Food.Units" />
+            </div>
+        </section>
+        <MudButton Class="mt-4 ml-auto" OnClick="SaveForm" Variant="Variant.Filled" Color="Color.Primary" name="Food.Save">
+            @(food.Id == 0 ? "Add Now" : "Save Changes")
+        </MudButton>
+    </MudForm>
+</MudContainer>

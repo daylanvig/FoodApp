@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.FoodApp", "Tests.Food
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodApp.Services", "FoodApp.Services\FoodApp.Services.csproj", "{131DAC17-2315-40C5-AEAB-313A1E2DFEC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Acceptance.FoodApp", "Tests.Acceptance.FoodApp\Tests.Acceptance.FoodApp.csproj", "{17ED6806-F0EE-4C22-AE12-D2403D3300D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Acceptance.FoodApp", "Tests.Acceptance.FoodApp\Tests.Acceptance.FoodApp.csproj", "{17ED6806-F0EE-4C22-AE12-D2403D3300D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

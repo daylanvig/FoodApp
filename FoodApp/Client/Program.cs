@@ -3,6 +3,8 @@ using FoodApp.Client.Services.System;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using MudBlazor;
+using MudBlazor.Services;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -25,6 +27,10 @@ namespace FoodApp.Client
             builder.Services.AddApiAuthorization()
                     .AddAccountClaimsPrincipalFactory<CustomUserFactory>();
             builder.Services.AddAppServices();
+            builder.Services
+                .AddMudBlazorDialog()
+                .AddMudBlazorSnackbar()
+                .AddMudBlazorResizeListener();
             await builder.Build().RunAsync();
         }
     }

@@ -1,6 +1,8 @@
 ﻿using FoodApp.Core.Domain.Accounts;
 using FoodApp.Data;
+using FoodApp.Data.Repositories;
 using FoodApp.Services.Accounts;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +22,7 @@ namespace FoodApp.Server.Configuration
         public static IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<DataContextFactory>();
-
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddDbContext<ApplicationUserContext>(options =>
             {
                 options.UseMySql(
@@ -42,17 +44,9 @@ namespace FoodApp.Server.Configuration
                    .EnableDetailedErrors()
                    .EnableSensitiveDataLogging();
             });
-            //services.AddDbContext<DataContext>(options =>
-            //{
-            //    options.UseMySql(
-            //       configuration.GetConnectionString("Users"),
-            //       ServerVersion.FromString("8.0.17"),
-            //       o => o.MigrationsAssembly(typeof(DataContext).Assembly.FullName)
-            //       )
-            //       .EnableDetailedErrors()
-            //       .EnableSensitiveDataLogging();
-            //}, ServiceLifetime.Scoped);
             services.AddScoped<IDataContext>(s => s.GetRequiredService<DataContextFactory>().CreateDbContext());
+
+            services.AddMediatR(typeof(Startup));
             ConfigureIdentity(services);
 
             return services;

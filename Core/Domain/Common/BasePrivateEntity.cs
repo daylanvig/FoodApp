@@ -1,4 +1,4 @@
-﻿using FoodApp.Core.Domain.Accounts;
+﻿using System;
 
 namespace Core.Domain.Common
 {
@@ -9,5 +9,20 @@ namespace Core.Domain.Common
     public abstract class BasePrivateEntity : BaseEntity
     {
         private string _applicationUserId;
+
+        public void SetApplicationUserId(string applicationUserId)
+        {
+            if (string.IsNullOrEmpty(applicationUserId))
+            {
+                throw new ArgumentNullException(nameof(applicationUserId));
+            }
+
+            if (!string.IsNullOrEmpty(_applicationUserId) && applicationUserId != _applicationUserId)
+            {
+                throw new CantChangeEntitiesApplicationUserIdException();
+            }
+
+            _applicationUserId = applicationUserId;
+        }
     }
 }

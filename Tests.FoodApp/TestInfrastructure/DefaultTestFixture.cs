@@ -2,37 +2,44 @@
 using AutoFixture.AutoMoq;
 using FoodApp.Data;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 
 namespace Tests.FoodApp.TestInfrastructure
 {
     public class DefaultTestFixture<TSut> : Fixture
     {
+        private TSut _sut;
+        protected TSut Sut
+        {
+            get
+            {
+                // init once to allow mock overrides 
+                if (_sut == null)
+                {
+                    _sut = CreateSut();
+                }
+                return _sut;
+            }
+        }
         public static DefaultTestFixture<TSut> Create()
         {
             return new DefaultTestFixture<TSut>();
         }
 
-        private DefaultTestFixture()
+        public DefaultTestFixture()
         {
             Customize(new AutoMoqCustomization());
         }
 
-        public TSut CreateSut()
+        public void SetMock<TMock>(Mock<TMock> mock) where TMock : class
         {
-            return Build<TSut>().Create();
+            this.Register<TMock>(() => mock.Object);
         }
 
-        public TContext AddInMemoryDatabase<TContext>(string tenantId = "") where TContext: DataContext
+        public virtual TSut CreateSut()
         {
-            var options = new DbContextOptionsBuilder<DataContext>()
-                                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                                .Options;
-            this.Register<DbContextOptions<DataContext>>(() => options);
-            this.Register<string>(() => tenantId);
-            var database = this.Freeze<TContext>();
-            this.Register<IDataContext>(() => database);
-            return database;
-        }
+            return Build<TSut>().Create();
+        }  
     }
 }

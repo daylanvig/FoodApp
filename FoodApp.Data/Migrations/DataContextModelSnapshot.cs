@@ -39,7 +39,7 @@ namespace FoodApp.Data.Migrations.Data
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150) CHARACTER SET utf8mb4");
 
-                    b.Property<int>("QuantityType")
+                    b.Property<int?>("QuantityTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("_applicationUserId")
@@ -47,7 +47,29 @@ namespace FoodApp.Data.Migrations.Data
 
                     b.HasKey("Id");
 
+                    b.HasIndex("QuantityTypeId");
+
                     b.ToTable("Foods");
+                });
+
+            modelBuilder.Entity("FoodApp.Core.Domain.Foods.QuantityType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTimeOffset>("LastModifiedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuantityTypes");
                 });
 
             modelBuilder.Entity("FoodApp.Core.Domain.Foods.Recipe", b =>
@@ -88,7 +110,7 @@ namespace FoodApp.Data.Migrations.Data
                     b.Property<DateTimeOffset>("LastModifiedOn")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("QuantityType")
+                    b.Property<int?>("QuantityTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("RecipeId")
@@ -98,9 +120,20 @@ namespace FoodApp.Data.Migrations.Data
 
                     b.HasIndex("FoodId");
 
+                    b.HasIndex("QuantityTypeId");
+
                     b.HasIndex("RecipeId");
 
                     b.ToTable("RecipeIngredients");
+                });
+
+            modelBuilder.Entity("FoodApp.Core.Domain.Foods.Food", b =>
+                {
+                    b.HasOne("FoodApp.Core.Domain.Foods.QuantityType", "QuantityType")
+                        .WithMany()
+                        .HasForeignKey("QuantityTypeId");
+
+                    b.Navigation("QuantityType");
                 });
 
             modelBuilder.Entity("FoodApp.Core.Domain.Foods.RecipeIngredient", b =>
@@ -111,6 +144,10 @@ namespace FoodApp.Data.Migrations.Data
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FoodApp.Core.Domain.Foods.QuantityType", "QuantityType")
+                        .WithMany()
+                        .HasForeignKey("QuantityTypeId");
+
                     b.HasOne("FoodApp.Core.Domain.Foods.Recipe", "Recipe")
                         .WithMany("RecipeIngredients")
                         .HasForeignKey("RecipeId")
@@ -118,6 +155,8 @@ namespace FoodApp.Data.Migrations.Data
                         .IsRequired();
 
                     b.Navigation("Food");
+
+                    b.Navigation("QuantityType");
 
                     b.Navigation("Recipe");
                 });

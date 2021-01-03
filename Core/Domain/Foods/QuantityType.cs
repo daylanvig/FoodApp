@@ -1,9 +1,29 @@
-﻿namespace FoodApp.Core.Domain.Foods
+﻿using Core.Domain.Common;
+
+namespace FoodApp.Core.Domain.Foods
 {
-    public enum QuantityType
+    public class QuantityType : BasePrivateEntity
     {
-        Milliliters,
-        Packages,
-        Items
+        public string Type { get; private set; }
+
+        public QuantityType() : base()
+        {
+
+        }
+
+        private QuantityType(string type) : this()
+        {
+            Type = type;
+        }
+
+        /// <summary>
+        /// Create a new quantity type
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns></returns>
+        public static QuantityType CreateNew(string type)
+        {
+            return new QuantityType(type);
+        }
     }
 }

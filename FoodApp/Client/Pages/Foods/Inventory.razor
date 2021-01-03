@@ -1,0 +1,8 @@
+﻿@inherits InventoryBase
+@page "/Inventory" 
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+
+
+<h3>Your Pantry</h3>
+
+<FoodApp.Client.Components.Foods.FoodForm></FoodApp.Client.Components.Foods.FoodForm>

@@ -20,10 +20,18 @@ namespace FoodApp.Data
         public DbSet<Food> Foods { get; set; }
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<QuantityType> QuantityTypes { get; set; }
 
         public new DbSet<TEntity> Set<TEntity>() where TEntity: BaseEntity
         {
             return base.Set<TEntity>();
+        }
+
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            this.SetApplicationUserId(_tenantId);
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

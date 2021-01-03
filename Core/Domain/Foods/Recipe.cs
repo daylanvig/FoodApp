@@ -12,7 +12,7 @@ namespace FoodApp.Core.Domain.Foods
 
         public Recipe()
         {
-
+            RecipeIngredients = new List<RecipeIngredient>().ToImmutableList();
         }
 
         private Recipe(string name, IEnumerable<RecipeIngredient> recipeIngredients) : this()
@@ -21,7 +21,13 @@ namespace FoodApp.Core.Domain.Foods
             RecipeIngredients = recipeIngredients.ToImmutableList();
         }
 
-        public static Recipe CreateRecipe(string name, IEnumerable<RecipeIngredient> recipeIngredients)
+        /// <summary>
+        /// Creates new instance
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="recipeIngredients">The recipe ingredients.</param>
+        /// <returns></returns>
+        public static Recipe CreateNew(string name, IEnumerable<RecipeIngredient> recipeIngredients)
         {
             return new Recipe(name, recipeIngredients);
         }
