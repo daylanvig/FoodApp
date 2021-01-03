@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FoodApp.Data.Repositories
@@ -41,13 +40,21 @@ namespace FoodApp.Data.Repositories
             return _table.SingleOrDefaultAsync(whereCondition);
         }
 
-        public async Task<IReadOnlyList<TEntity>> ToListAsync(Expression<Func<TEntity, bool>> whereCondition = null)
+        public async Task<IReadOnlyList<TEntity>> ToListAsync(
+            Expression<Func<TEntity, bool>> whereCondition = null,
+            params string[] includes)
         {
+            IQueryable<TEntity> queryItems = _table;
+            foreach(var include in includes)
+            {
+                queryItems = queryItems.Include(include);
+            }
+
             if (whereCondition != null)
             {
-                return (await _table.Where(whereCondition).ToListAsync()).ToImmutableList();
+                return (await queryItems.Where(whereCondition).ToListAsync()).ToImmutableList();
             }
-            return (await _table.ToListAsync()).ToImmutableList();
+            return (await queryItems.ToListAsync()).ToImmutableList();
         }
     }
 }

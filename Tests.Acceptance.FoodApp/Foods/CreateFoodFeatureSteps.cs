@@ -43,7 +43,13 @@ namespace Tests.Acceptance.FoodApp.Foods
         {
             driver.WaitForElement(By.Name("Food.AmountOnHand")).SendKeys("Items");
         }
-        
+
+        [Given(@"I click Add New Food")]
+        public void GivenIClickAddNewFood()
+        {
+            driver.WaitForElement(By.Name("Food.Save")).Click();
+        }
+
         [Then(@"my inventory list should have ""(.*)"" with a quantity of (.*) item\(s\)")]
         public void ThenMyInventoryListShouldHaveWithAQuantityOfItemS(string p0, int p1)
         {

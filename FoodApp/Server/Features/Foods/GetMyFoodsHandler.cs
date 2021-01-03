@@ -19,7 +19,7 @@ namespace FoodApp.Server.Features.Foods
         }
         public async Task<IEnumerable<Food>> Handle(GetMyFoods request, CancellationToken cancellationToken)
         {
-            var foods = await _foodRepository.ToListAsync();
+            var foods = await _foodRepository.ToListAsync(includes: nameof(Core.Domain.Foods.Food.QuantityType));
 
             return foods.Select(f => new Food
             {

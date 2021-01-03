@@ -1,6 +1,6 @@
 ﻿@inherits FoodFormBase
 
-<MudContainer MaxWidth="MaxWidth.Small">
+<MudContainer>
     <MudForm @ref="form" id="Food_Form">
         @if (food.Id == 0)
         {
@@ -18,8 +18,10 @@
                 <MudTextField Label="Units" Required="true" @bind-Value="food.QuantityType" name="Food.Units" />
             </div>
         </section>
-        <MudButton Class="mt-4 ml-auto" OnClick="SaveForm" Variant="Variant.Filled" Color="Color.Primary" name="Food.Save">
-            @(food.Id == 0 ? "Add Now" : "Save Changes")
-        </MudButton>
+        <div class="d-flex justify-content-end mt-4">
+            <MudButton OnClick="SaveForm" Variant="Variant.Filled" Color="Color.Primary" name="Food.Save">
+                @(food.Id == 0 ? "Add Now" : "Save Changes")
+            </MudButton>
+        </div>
     </MudForm>
 </MudContainer>

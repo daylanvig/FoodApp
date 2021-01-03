@@ -11,6 +11,6 @@ namespace FoodApp.Data.Repositories
         Task<int> AddAsync(TEntity entity);
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> whereCondition);
         Task<TEntity> GetByIdAsync(int id);
-        Task<IReadOnlyList<TEntity>> ToListAsync(Expression<Func<TEntity, bool>> whereCondition = null);
+        Task<IReadOnlyList<TEntity>> ToListAsync(Expression<Func<TEntity, bool>> whereCondition = null, params string[] includes);
     }
 }
