@@ -2,13 +2,16 @@
 using FoodApp.Shared.Models.Foods;
 using MediatR;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FoodApp.Server.Features.Foods
 {
+    /// <summary>
+    /// Get users foods
+    /// </summary>
+    /// <seealso cref="MediatR.IRequestHandler{FoodApp.Server.Features.Foods.GetMyFoods, System.Collections.Generic.IEnumerable{FoodApp.Shared.Models.Foods.Food}}" />
     public class GetMyFoodsHandler : IRequestHandler<GetMyFoods, IEnumerable<Food>>
     {
         private readonly IRepository<Core.Domain.Foods.Food> _foodRepository;

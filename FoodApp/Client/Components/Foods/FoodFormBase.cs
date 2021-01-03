@@ -12,9 +12,8 @@ namespace FoodApp.Client.Components.Foods
         public IApiRequestService ApiRequestService { get; set; }
         [Inject]
         public ISnackbar Snackbar { get; set; }
-
         [Parameter]
-        public EventCallback<Food>? OnSave { get; set; }
+        public EventCallback OnSave { get; set; }
 
         protected MudForm form;
         protected Food food = new();
@@ -27,14 +26,11 @@ namespace FoodApp.Client.Components.Foods
 
         protected async Task SaveForm()
         {
+            var foodName = food.Name;
             food = await ApiRequestService.PostJsonAsync<Food, Food>("/api/Foods/", food);
-            if (OnSave != null)
-            {
-                await OnSave.Value.InvokeAsync(food);
-            }
+            Snackbar.Add($"\"{foodName}\" successfully saved!", Severity.Success);
             form.Reset();
-            Snackbar.Add($"{food.Name} successfully saved", Severity.Success);
-            StateHasChanged();
+            await OnSave.InvokeAsync();
         }
     }
 }

@@ -29,7 +29,11 @@ namespace FoodApp.Client
             builder.Services.AddAppServices();
             builder.Services
                 .AddMudBlazorDialog()
-                .AddMudBlazorSnackbar()
+                .AddMudBlazorSnackbar(c =>
+                {
+                    c.PositionClass = Defaults.Classes.Position.BottomCenter;
+                    c.SnackbarVariant = Variant.Filled;
+                })
                 .AddMudBlazorResizeListener();
             await builder.Build().RunAsync();
         }

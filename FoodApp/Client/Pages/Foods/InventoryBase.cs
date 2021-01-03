@@ -11,12 +11,25 @@ namespace FoodApp.Client.Pages.Foods
         [Inject]
         IApiRequestService ApiRequestService { get; set; }
 
-        protected IReadOnlyList<Food> foods = new List<Food>();
+        protected IReadOnlyList<Food> foods;
+
+
+        protected async Task LoadFoodData()
+        {
+            foods = await ApiRequestService.GetFromJsonAsync<IReadOnlyList<Food>>("/api/Foods/");
+        }
+
+
+        protected async Task Update()
+        {
+            await LoadFoodData();
+            StateHasChanged();
+        }
 
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            foods = await ApiRequestService.GetFromJsonAsync<IReadOnlyList<Food>>("/api/Foods/");
+            await LoadFoodData();
         }
     }
 }
