@@ -1,4 +1,5 @@
-﻿using FoodApp.Core.Domain.Foods;
+﻿using FoodApp.Core.Common;
+using FoodApp.Core.Domain.Foods;
 using FoodApp.Core.Interfaces;
 using FoodApp.Services.Foods;
 using MediatR;
@@ -31,7 +32,7 @@ namespace FoodApp.Server.Features.Foods
             Core.Domain.Foods.Food existingFood = await _foodRepository.FindAsync(f => f.Name == request.Name);
             if (existingFood != null)
             {
-                throw new ArgumentException(nameof(Shared.Models.Foods.Food.Name));
+                throw new ArgumentException("Food with that name already exists", nameof(Shared.Models.Foods.Food.Name));
             }
 
             // Create the food
