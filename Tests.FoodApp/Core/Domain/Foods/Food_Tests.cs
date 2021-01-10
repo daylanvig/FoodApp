@@ -66,6 +66,41 @@ namespace Tests.FoodApp.Core.Domain.Foods
         }
     }
 
+    public class Food_UpdateName_Tests : Food_Test_Base
+    {
+        [Fact]
+        public void ShouldSetNameToBeBanana()
+        {
+            Sut.UpdateName("Banana");
+            Assert.Equal("Banana", Sut.Name);
+        }
+
+        [Fact]
+        public void ShouldThrowAnArgumentExceptionWhenNameIsEmpty()
+        {
+            Assert.Throws<ArgumentException>(() => Sut.UpdateName(string.Empty));
+        }
+    }
+
+    public class Food_UpdateQuantityType_Tests : Food_Test_Base
+    {
+        [Fact]
+        public void ShouldSetQuantityType()
+        {
+            // Arrange
+            var quantityType = QuantityType.CreateNew("T");
+            // Act
+            Sut.UpdateQuantityType(quantityType);
+            // Assert
+            Assert.Equal(quantityType, Sut.QuantityType);
+        }
+
+        [Fact]
+        public void ShouldThrowAnArgumentExceptionWhenNameIsEmpty()
+        {
+            Assert.Throws<ArgumentException>(() => Sut.UpdateQuantityType(null));
+        }
+    }
 
     public class Food_Test_Base : DefaultTestFixture<Food>
     {

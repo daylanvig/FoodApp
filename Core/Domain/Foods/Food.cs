@@ -1,5 +1,7 @@
 ﻿using Core;
 using Core.Domain.Common;
+using FoodApp.Core.Common;
+using System;
 
 namespace FoodApp.Core.Domain.Foods
 {
@@ -36,6 +38,22 @@ namespace FoodApp.Core.Domain.Foods
             return new Food(name, amountOnHand, quantityType);
         }
 
+        public void UpdateName(string name)
+        {
+            Guard.AgainstNullOrEmpty(name, GetPropertyIdentifier(nameof(name)));
+            IsCreated();
+
+            Name = name;
+        }
+
+        public void UpdateQuantityType(QuantityType quantityType)
+        {
+            Guard.AgainstNull(quantityType, GetPropertyIdentifier(nameof(quantityType)));
+            IsCreated();
+
+            QuantityType = quantityType;
+        }
+
         /// <summary>
         /// Updates the quantity on hand.
         /// </summary>
@@ -50,6 +68,12 @@ namespace FoodApp.Core.Domain.Foods
                 throw new FoodQuantityMustBeGreaterThanZeroException(Name);
             }
             AmountOnHand = newQuantity;
+        }
+
+
+        private string GetPropertyIdentifier(string property)
+        {
+            return $"{nameof(Food)} - {property}";
         }
     }
 }
