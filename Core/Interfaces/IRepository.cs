@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace FoodApp.Data.Repositories
+namespace FoodApp.Core.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {

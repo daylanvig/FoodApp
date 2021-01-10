@@ -1,4 +1,5 @@
 ﻿using FoodApp.Core.Domain.Accounts;
+using FoodApp.Core.Interfaces;
 using FoodApp.Data;
 using FoodApp.Data.Repositories;
 using FoodApp.Services.Accounts;

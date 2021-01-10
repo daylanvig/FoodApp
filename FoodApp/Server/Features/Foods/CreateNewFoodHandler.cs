@@ -1,6 +1,6 @@
 ﻿using FoodApp.Core.Domain.Foods;
-using FoodApp.Data.Repositories;
-using FoodApp.Shared.Models.Foods;
+using FoodApp.Core.Interfaces;
+using FoodApp.Services.Foods;
 using MediatR;
 using System;
 using System.Threading;
@@ -11,28 +11,24 @@ namespace FoodApp.Server.Features.Foods
     public class CreateNewFoodHandler : IRequestHandler<CreateNewFood, Shared.Models.Foods.Food>
     {
         private readonly IRepository<Core.Domain.Foods.Food> _foodRepository;
-        private readonly IRepository<QuantityType> _quantityTypeRepository;
+        private readonly IQuantityTypeService _quantityTypeService;
+        
 
         public CreateNewFoodHandler(
             IRepository<Core.Domain.Foods.Food> foodRepository, 
-            IRepository<QuantityType> quantityTypeRepository
+            IQuantityTypeService quantityTypeService
         )
         {
             _foodRepository = foodRepository;
-            _quantityTypeRepository = quantityTypeRepository;
+            _quantityTypeService = quantityTypeService;
         }
 
         public async Task<Shared.Models.Foods.Food> Handle(CreateNewFood request, CancellationToken cancellationToken = default)
         {
-            QuantityType quantityType = await _quantityTypeRepository.FindAsync(q => q.Type == request.QuantityType);
-            // No duplicates - if exists, reuse existing.
-            if (quantityType == null)
-            {
-                quantityType = QuantityType.CreateNew(request.QuantityType);
-            }
+            QuantityType quantityType = await _quantityTypeService.EnsureCreatedAsync(request.QuantityType);
 
             // No duplicates - if exists, let user handle
-            var existingFood = await _foodRepository.FindAsync(f => f.Name == request.Name);
+            Core.Domain.Foods.Food existingFood = await _foodRepository.FindAsync(f => f.Name == request.Name);
             if (existingFood != null)
             {
                 throw new ArgumentException(nameof(Shared.Models.Foods.Food.Name));
