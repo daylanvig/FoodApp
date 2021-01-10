@@ -31,9 +31,20 @@ namespace FoodApp.Data.Repositories
             return await _database.SaveChangesAsync();
         }
 
-        public Task<TEntity> GetByIdAsync(int id)
+        public Task<TEntity> GetByIdAsync(int id,params string[] includes)
         {
-            return _table.SingleOrDefaultAsync(e => e.Id == id);
+            IQueryable<TEntity> queryItems = _table;
+            foreach (var include in includes)
+            {
+                queryItems = queryItems.Include(include);
+            }
+            return queryItems.SingleOrDefaultAsync(e => e.Id == id);
+        }
+
+        public Task<int> EditAsync(TEntity entity)
+        {
+            _table.Update(entity);
+            return _database.SaveChangesAsync();
         }
 
         public Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> whereCondition)

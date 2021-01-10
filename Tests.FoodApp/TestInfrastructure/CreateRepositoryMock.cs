@@ -16,6 +16,8 @@ namespace Tests.FoodApp.TestInfrastructure
             listEntities ??= Array.Empty<T>();
 
             var repository = new Mock<IRepository<T>>();
+            repository.Setup(m => m.GetByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(findEntity);
             repository
                 .Setup(m => m.FindAsync(It.IsAny<Expression<Func<T, bool>>>()))
                 .ReturnsAsync(findEntity);

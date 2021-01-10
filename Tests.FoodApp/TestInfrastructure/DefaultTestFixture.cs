@@ -1,9 +1,8 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
-using FoodApp.Data;
-using Microsoft.EntityFrameworkCore;
+using Core.Domain.Common;
+using FoodApp.Core.Interfaces;
 using Moq;
-using System;
 
 namespace Tests.FoodApp.TestInfrastructure
 {
@@ -41,5 +40,19 @@ namespace Tests.FoodApp.TestInfrastructure
         {
             return Build<TSut>().Create();
         }  
+
+        public Mock<TMock> DoMock<TMock, TReturns>(TReturns returns) where TMock : class
+        {
+            var mock = CreateMock.Default<TMock, TReturns>(returns);
+            SetMock(mock);
+            return mock;
+        }
+
+        public Mock<IRepository<TEntity>> DoMockRepository<TEntity>(TEntity entity) where TEntity : BaseEntity
+        {
+            var mock = CreateRepositoryMock.CreateRepository<TEntity>(entity);
+            SetMock(mock);
+            return mock;
+        }
     }
 }

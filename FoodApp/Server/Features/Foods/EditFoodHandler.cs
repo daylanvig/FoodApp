@@ -25,22 +25,21 @@ namespace FoodApp.Server.Features.Foods
 
         public async Task<Food> Handle(EditFood request, CancellationToken cancellationToken = default)
         {
+            // quantity type is updated independently
             var quantityType = await _quantityTypeService.EnsureCreatedAsync(request.QuantityType);
 
             Core.Domain.Foods.Food existingFood = await _foodRepository.GetByIdAsync(request.Id);
             Guard.AgainstNull(existingFood, "Food not found");
 
             existingFood.UpdateName(request.Name);
-            existingFood.UpdateQuantityOnHand(request.AmountOnHand);
-            existingFood.UpdateQuantityType(quantityType);
-            // todo -> edit and update
-
+            existingFood.UpdateQuantityOnHand(request.AmountOnHand);       
+            await _foodRepository.EditAsync(existingFood);
             return new Food
             {
                 AmountOnHand = existingFood.AmountOnHand,
                 Id = existingFood.Id,
                 Name = existingFood.Name,
-                QuantityType = existingFood.QuantityType.Type
+                QuantityType = quantityType.Type
             };
         }
     }
