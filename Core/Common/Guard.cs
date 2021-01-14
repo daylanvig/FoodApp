@@ -4,11 +4,11 @@ namespace FoodApp.Core.Common
 {
     public static class Guard
     {
-        public static void AgainstNull(object value, string paramName)
+        public static void AgainstNull(object value, string paramName, string message = "Value is null")
         {
             if (value == null)
             {
-                throw new ArgumentException("Value is null.", paramName);
+                throw new ArgumentException(message, paramName);
             }
         }
         public static void AgainstNullOrEmpty(string value, string paramName)

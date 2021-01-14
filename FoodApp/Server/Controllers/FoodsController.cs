@@ -1,7 +1,9 @@
 ﻿using FoodApp.Core.Interfaces;
 using FoodApp.Server.Features.Foods;
+using FoodApp.Shared.Models.Foods;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -22,36 +24,38 @@ namespace FoodApp.Server.Controllers
 
         // GET: api/Foods
         [HttpGet]
-        public Task<IEnumerable<Shared.Models.Foods.Food>> Get()
+        public Task<IEnumerable<FoodModel>> Get()
         {
             return _mediator.Send(new GetMyFoods());
         }
 
         // GET api/Foods/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Task<FoodModel> Get(int id)
         {
-            return "value";
+            return _mediator.Send(new GetFood(id));
         }
 
         // POST api/Foods
         [HttpPost]
-        public Task<Shared.Models.Foods.Food> Post([FromBody] Shared.Models.Foods.Food food)
+        public Task<FoodModel> Post([FromBody] FoodModel food)
         {
-            return _mediator.Send(new CreateNewFood(food.Name, food.AmountOnHand.Value, food.QuantityType));
+            return _mediator.Send(new CreateNewFood(food.Name, food.AmountOnHand.GetValueOrDefault(0), food.QuantityType));
         }
 
         // PUT api/Foods/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Shared.Models.Foods.Food food)
+        public Task<FoodModel> Put(int id, [FromBody] FoodModel food)
         {
-
+            return _mediator.Send(new EditFood(id, food.Name, food.AmountOnHand.GetValueOrDefault(0), food.QuantityType));
         }
 
         // DELETE api/Foods/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            // todo -> implement
+            throw new NotImplementedException();
         }
     }
 }

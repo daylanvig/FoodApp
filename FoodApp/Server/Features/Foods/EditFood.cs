@@ -2,7 +2,7 @@
 
 namespace FoodApp.Server.Features.Foods
 {
-    public class EditFood : IRequest<Shared.Models.Foods.Food>
+    public class EditFood : IRequest<Shared.Models.Foods.FoodModel>
     {
         public EditFood(int id, string name, decimal amountOnHand, string quantityType)
         {

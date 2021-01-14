@@ -12,8 +12,8 @@ namespace FoodApp.Server.Features.Foods
     /// <summary>
     /// Get users foods
     /// </summary>
-    /// <seealso cref="MediatR.IRequestHandler{FoodApp.Server.Features.Foods.GetMyFoods, System.Collections.Generic.IEnumerable{FoodApp.Shared.Models.Foods.Food}}" />
-    public class GetMyFoodsHandler : IRequestHandler<GetMyFoods, IEnumerable<Food>>
+    /// <seealso cref="MediatR.IRequestHandler{FoodApp.Server.Features.Foods.GetMyFoods, System.Collections.Generic.IEnumerable{FoodApp.Shared.Models.Foods.FoodModel}}" />
+    public class GetMyFoodsHandler : IRequestHandler<GetMyFoods, IEnumerable<FoodModel>>
     {
         private readonly IRepository<Core.Domain.Foods.Food> _foodRepository;
 
@@ -22,11 +22,11 @@ namespace FoodApp.Server.Features.Foods
             _foodRepository = foodRepository;
         }
 
-        public async Task<IEnumerable<Food>> Handle(GetMyFoods request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<FoodModel>> Handle(GetMyFoods request, CancellationToken cancellationToken)
         {
             var foods = await _foodRepository.ToListAsync(includes: nameof(Core.Domain.Foods.Food.QuantityType));
 
-            return foods.Select(f => new Food
+            return foods.Select(f => new FoodModel
             {
                 Id = f.Id,
                 Name = f.Name,

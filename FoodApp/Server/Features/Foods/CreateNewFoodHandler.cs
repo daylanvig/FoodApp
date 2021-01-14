@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Server.Features.Foods
 {
-    public class CreateNewFoodHandler : IRequestHandler<CreateNewFood, Shared.Models.Foods.Food>
+    public class CreateNewFoodHandler : IRequestHandler<CreateNewFood, Shared.Models.Foods.FoodModel>
     {
         private readonly IRepository<Core.Domain.Foods.Food> _foodRepository;
         private readonly IQuantityTypeService _quantityTypeService;
@@ -24,21 +24,21 @@ namespace FoodApp.Server.Features.Foods
             _quantityTypeService = quantityTypeService;
         }
 
-        public async Task<Shared.Models.Foods.Food> Handle(CreateNewFood request, CancellationToken cancellationToken = default)
+        public async Task<Shared.Models.Foods.FoodModel> Handle(CreateNewFood request, CancellationToken cancellationToken = default)
         {
             QuantityType quantityType = await _quantityTypeService.EnsureCreatedAsync(request.QuantityType);
 
             // No duplicates - if exists, let user handle
-            Core.Domain.Foods.Food existingFood = await _foodRepository.FindAsync(f => f.Name == request.Name);
+            Food existingFood = await _foodRepository.FindAsync(f => f.Name == request.Name);
             if (existingFood != null)
             {
-                throw new ArgumentException("Food with that name already exists", nameof(Shared.Models.Foods.Food.Name));
+                throw new ArgumentException("Food with that name already exists", nameof(Shared.Models.Foods.FoodModel.Name));
             }
 
             // Create the food
-            var food = Core.Domain.Foods.Food.CreateNew(request.Name, request.AmountOnHand, quantityType);
+            var food = Food.CreateNew(request.Name, request.AmountOnHand, quantityType);
             await _foodRepository.AddAsync(food);
-            return new Shared.Models.Foods.Food
+            return new Shared.Models.Foods.FoodModel
             {
                 AmountOnHand = food.AmountOnHand,
                 Id = food.Id,

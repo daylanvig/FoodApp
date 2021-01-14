@@ -16,7 +16,7 @@ namespace FoodApp.Client.Components.Foods
         public EventCallback OnSave { get; set; }
 
         protected MudForm form;
-        protected Food food = new();
+        protected FoodModel food = new();
 
         protected async override Task OnInitializedAsync()
         {
@@ -27,7 +27,7 @@ namespace FoodApp.Client.Components.Foods
         protected async Task SaveForm()
         {
             var foodName = food.Name;
-            food = await ApiRequestService.PostJsonAsync<Food, Food>("/api/Foods/", food);
+            food = await ApiRequestService.PostJsonAsync<FoodModel, FoodModel>("/api/Foods/", food);
             Snackbar.Add($"\"{foodName}\" successfully saved!", Severity.Success);
             form.Reset();
             await OnSave.InvokeAsync();
