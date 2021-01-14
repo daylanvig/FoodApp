@@ -9,6 +9,7 @@ namespace FoodApp.Core.Interfaces
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         Task<int> AddAsync(TEntity entity);
+        Task<int> DeleteAsync(TEntity entity);
         Task<int> EditAsync(TEntity entity);
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> whereCondition);
         Task<TEntity> GetByIdAsync(int id, params string[] includes);

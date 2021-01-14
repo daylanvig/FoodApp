@@ -47,6 +47,12 @@ namespace FoodApp.Data.Repositories
             return _database.SaveChangesAsync();
         }
 
+        public Task<int> DeleteAsync(TEntity entity)
+        {
+            _table.Remove(entity);
+            return _database.SaveChangesAsync();
+        }
+
         public Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> whereCondition)
         {
             return _table.SingleOrDefaultAsync(whereCondition);
