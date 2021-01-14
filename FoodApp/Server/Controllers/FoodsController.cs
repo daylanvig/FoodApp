@@ -1,4 +1,5 @@
-﻿using FoodApp.Core.Interfaces;
+﻿using FoodApp.Core.Domain.Foods;
+using FoodApp.Core.Interfaces;
 using FoodApp.Server.Features.Foods;
 using FoodApp.Shared.Models.Foods;
 using MediatR;
@@ -14,12 +15,12 @@ namespace FoodApp.Server.Controllers
     public class FoodsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ITenantProvider _tenantProvider;
+        private readonly IRepository<Food> _foodRepository;
 
-        public FoodsController(IMediator mediator, ITenantProvider tenantProvider)
+        public FoodsController(IMediator mediator, IRepository<Food> foodRepository)
         {
             _mediator = mediator;
-            _tenantProvider = tenantProvider;
+            _foodRepository = foodRepository;
         }
 
         // GET: api/Foods
@@ -52,10 +53,15 @@ namespace FoodApp.Server.Controllers
 
         // DELETE api/Foods/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            // todo -> implement
-            throw new NotImplementedException();
+            var food = await _foodRepository.GetByIdAsync(id);
+            if (food == null)
+            {
+                return BadRequest();
+            }
+            await _foodRepository.DeleteAsync(food);
+            return Ok();
         }
     }
 }
