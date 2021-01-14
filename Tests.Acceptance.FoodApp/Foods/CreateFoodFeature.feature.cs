@@ -103,16 +103,16 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("I navigate to the inventory page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 6
- testRunner.And("I click the \"Add food\" button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 7
  testRunner.And("I enter a description of \"Pink Lady Apple\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 8
+#line 7
  testRunner.And("I enter a quantity of 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 9
+#line 8
  testRunner.And("I select a quantity type of Items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 9
+ testRunner.And("I click Add New Food", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 10
  testRunner.Then("my inventory list should have \"Pink Lady Apply\" with a quantity of 1 item(s)", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

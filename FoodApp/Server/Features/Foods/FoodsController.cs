@@ -4,11 +4,10 @@ using FoodApp.Server.Features.Foods;
 using FoodApp.Shared.Models.Foods;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace FoodApp.Server.Controllers
+namespace FoodApp.Server.Features.Foods
 {
     [Route("api/[controller]")]
     [ApiController]
