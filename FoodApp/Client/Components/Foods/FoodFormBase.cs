@@ -15,11 +15,14 @@ namespace FoodApp.Client.Components.Foods
         [Parameter]
         public EventCallback OnSave { get; set; }
 
+        protected FoodModel food;
+        [Parameter]
+        public FoodModel Food { get; set; }
         protected MudForm form;
-        protected FoodModel food = new();
 
         protected async override Task OnInitializedAsync()
         {
+            food = Food;
             await base.OnInitializedAsync();
         }
 

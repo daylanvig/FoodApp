@@ -6,7 +6,7 @@
 <h1>Inventory</h1>
 <MudContainer MaxWidth="MaxWidth.Medium">
 
-    <FoodApp.Client.Components.Foods.FoodForm OnSave="@Update"></FoodApp.Client.Components.Foods.FoodForm>
+    <FoodApp.Client.Components.Foods.FoodForm Food="@new()" OnSave="@Update"></FoodApp.Client.Components.Foods.FoodForm>
     <MudDivider Class="mt-4 mb-4"></MudDivider>
     <MudContainer>
         <h2>Your Pantry</h2>
@@ -20,7 +20,7 @@
             <tbody>
                 @if (foods == null)
                 {
-                    <tr>Loading your pantry...</tr>
+                    <MudProgressCircular></MudProgressCircular>
                 }
                 else if (foods.Count() == 0)
                 {
@@ -28,7 +28,7 @@
                 }
                 else
                 {
-                    @foreach (var food in foods)
+                    @foreach (var food in foods.OrderBy(f => f.Name))
                     {
                         <tr>
                             <td>@food.Name</td>

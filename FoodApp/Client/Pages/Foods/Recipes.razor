@@ -1,7 +1,38 @@
-﻿@page "/Recipes" 
+﻿@page "/Recipes"
 @inherits RecipesBase
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 
 <h1>Recipes</h1>
-
-TODO!
+<MudContainer MaxWidth="MaxWidth.Medium">
+    <MudContainer>
+        <h2>Your Recipes</h2>
+        <MudSimpleTable>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (recipes == null)
+                {
+                    <tr>
+                        <MudProgressCircular></MudProgressCircular>
+                    </tr>
+                }
+                else if (recipes.Count == 0)
+                {
+                    <tr>You don't have any recipes. <MudLink tabindex="0" @onclick="ShowAddRecipe">Add one now?</MudLink></tr>
+                }
+                else
+                {
+                    @foreach (var recipe in recipes.OrderBy(r => r.Name))
+                    {
+                        <tr>
+                            <td>@recipe.Name</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </MudSimpleTable>
+    </MudContainer>
+</MudContainer>

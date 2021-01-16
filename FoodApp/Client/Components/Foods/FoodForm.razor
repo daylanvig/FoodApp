@@ -11,7 +11,7 @@
             <h2>Edit @food.Name</h2>
         }
         <section aria-label="Food Form">
-            <MudTextField T="string" Label="Name" Required="true" @bind-Value="food.Name" name="Food.Name" />
+            <MudTextField T="string" Label="Name" Required="true"  @bind-Value="food.Name" name="Food.Name" />
             <div>
                 <MudTextField T="decimal?" Label="On Hand" Required="true" @bind-Value="food.AmountOnHand" name="Food.AmountOnHand" />
                 @*TODO: Replace this with an auto complete dropdown component*@

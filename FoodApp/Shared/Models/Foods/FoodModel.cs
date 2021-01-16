@@ -14,7 +14,7 @@ namespace FoodApp.Shared.Models.Foods
         public string QuanityType { get; }
         [Required]
         public string QuantityType { get; set; }
-        public FoodModel(int id = 0, string name = "", decimal? amountOnHand = null, string quanityType = "")
+        public FoodModel(int id = 0, string name = null, decimal? amountOnHand = null, string quanityType = null)
         {
             Id = id;
             Name = name;
