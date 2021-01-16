@@ -11,7 +11,15 @@ namespace FoodApp.Shared.Models.Foods
         [Range(0, double.MaxValue, ErrorMessage = "Value can not be negative")]
         [Required]
         public decimal? AmountOnHand { get; set; }
+        public string QuanityType { get; }
         [Required]
         public string QuantityType { get; set; }
+        public FoodModel(int id = 0, string name = "", decimal? amountOnHand = null, string quanityType = "")
+        {
+            Id = id;
+            Name = name;
+            AmountOnHand = amountOnHand;
+            QuanityType = quanityType;
+        }
     }
 }

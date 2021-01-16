@@ -1,19 +1,22 @@
 ﻿using FoodApp.Core.Domain.Foods;
-using FoodApp.Server.Features.Foods;
+using FoodApp.Services.Foods;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Tests.FoodApp.TestInfrastructure;
 using Xunit;
+using static FoodApp.Server.Features.Foods.Create;
 
 namespace Tests.FoodApp.Features.Foods
 {
-    public class CreateNewFoodHandler_Tests : DefaultTestFixture<CreateNewFoodHandler>
+    public class CreateNewFoodHandler_Tests : DefaultTestFixture<Handler>
     {
-        private readonly CreateNewFood _create = new CreateNewFood("Food", 0, "QT");
+        private readonly Command _create = new("Food", 0, "QT");
+
+        public CreateNewFoodHandler_Tests()
+        {
+            DoMock<IQuantityTypeService, Task<QuantityType>>(Task.FromResult(CreateEntity.CreateExistingQuantityType("QT")));
+        }
 
         [Fact]
         public async Task ThrowAnArgumentExceptionWhenFoodNameNotUnique()

@@ -12,9 +12,9 @@ using Xunit;
 
 namespace Tests.FoodApp.Features.Foods
 {
-    public class EditFoodHandler_Tests : DefaultTestFixture<EditFoodHandler>
+    public class EditFoodHandler_Tests : DefaultTestFixture<Edit.EditFoodHandler>
     {
-        private readonly EditFood _editFood = new EditFood(2, "editFoodHandleFoodName", 33, "editFoodHandlerQuantity");
+        private readonly Edit.Command _editFood = new(2, "editFoodHandleFoodName", 33, "editFoodHandlerQuantity");
         private readonly Mock<IQuantityTypeService> _mockQuantityTypeService;
         public EditFoodHandler_Tests()
         {
@@ -51,7 +51,6 @@ namespace Tests.FoodApp.Features.Foods
             // Assert
             mockRepository.Verify(m => m.EditAsync(It.IsAny<Food>()), Times.Once);
         }
-
 
         [Fact]
         public void UpdateFoodName()
