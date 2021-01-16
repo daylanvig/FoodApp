@@ -19,11 +19,12 @@ namespace FoodApp.Server.Features.Recipes
         {
             _mediator = mediator;
         }
+
         // GET: api/Recipes
         [HttpGet]
         public Task<IEnumerable<RecipeModel>> Get()
         {
-            throw new NotImplementedException();
+            return _mediator.Send(new Listing.Query());
         }
 
         // GET api/Recipes/5
@@ -37,7 +38,7 @@ namespace FoodApp.Server.Features.Recipes
         [HttpPost]
         public Task<RecipeModel> Post([FromBody] RecipeModel food)
         {
-            throw new NotImplementedException();
+            return _mediator.Send(new Create.Command(food.Name, food.Ingredients, food.Url));
         }
 
         // PUT api/Recipes/5

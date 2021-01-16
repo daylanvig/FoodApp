@@ -15,6 +15,5 @@ namespace FoodApp.Shared.Models.Foods
         public List<RecipeIngredientModel> Ingredients { get; set; } = new List<RecipeIngredientModel>();
         [DataType(DataType.Url)] // optional
         public string Url { get; set; }
-
     }
 }

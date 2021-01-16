@@ -17,5 +17,11 @@ namespace Tests.FoodApp.Features.Foods
         {
             throw new NotImplementedException();
         }
+
+        [Fact]
+        public void ShouldAddOneRecipeIngredientToRepository()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

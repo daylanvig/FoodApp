@@ -1,5 +1,8 @@
 ﻿using FoodApp.Core.Domain.Foods;
 using FoodApp.Core.Interfaces;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FoodApp.Services.Foods
@@ -23,6 +26,25 @@ namespace FoodApp.Services.Foods
             var quantityType = QuantityType.CreateNew(name);
             await _quantityTypeRepository.AddAsync(quantityType);
             return quantityType;
+        }
+
+        public async Task<IEnumerable<QuantityType>> EnsureCreatedAsync(IEnumerable<string> names)
+        {
+            var uniqueNames = names.Distinct();
+            List<QuantityType> quantityTypes = new List<QuantityType>(uniqueNames.Count());
+
+            var existingTypes = await _quantityTypeRepository.ToListAsync(q => names.Contains(q.Type));
+            foreach (var quantityName in uniqueNames)
+            {
+                var existingType = existingTypes.SingleOrDefault(q => q.Type == quantityName);
+                if (existingType == null)
+                {
+                    existingType = QuantityType.CreateNew(quantityName);
+                    await _quantityTypeRepository.AddAsync(existingType);
+                }
+                quantityTypes.Add(existingType);
+            }
+            return quantityTypes;
         }
     }
 }
