@@ -1,5 +1,6 @@
 ﻿using Core.Domain.Common;
 using FoodApp.Core.Domain.Foods;
+using FoodApp.Core.Domain.QuantityTypes;
 using FoodApp.Core.Interfaces;
 using FoodApp.Data.Configurations.Foods;
 using Microsoft.EntityFrameworkCore;

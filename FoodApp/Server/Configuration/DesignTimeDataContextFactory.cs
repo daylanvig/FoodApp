@@ -32,7 +32,7 @@ namespace FoodApp.Server.Configuration
 
 			
 			var optionsBuilder = new DbContextOptionsBuilder<DataContext>()
-				.UseMySql(configuration.GetConnectionString("Default"), ServerVersion.FromString("8.0.17"), o => o.MigrationsAssembly(typeof(ApplicationUserContext).Assembly.FullName));
+				.UseMySql(configuration.GetConnectionString("Default"), ServerVersion.FromString("8.0.17"), o => o.MigrationsAssembly(typeof(DataContext).Assembly.FullName));
 			return new DataContext(optionsBuilder.Options, "");
 		}
 	}

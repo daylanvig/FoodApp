@@ -1,6 +1,6 @@
 ﻿using AutoFixture.Xunit2;
 using Core;
-using FoodApp.Core.Domain.Foods;
+using FoodApp.Core.Domain.QuantityTypes;
 using System;
 using Tests.FoodApp.TestInfrastructure;
 using Xunit;

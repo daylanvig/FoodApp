@@ -1,4 +1,5 @@
-﻿using FoodApp.Core.Domain.Accounts;
+﻿using AutoMapper;
+using FoodApp.Core.Domain.Accounts;
 using FoodApp.Core.Interfaces;
 using FoodApp.Data;
 using FoodApp.Data.Repositories;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using System.Security.Claims;
 
 namespace FoodApp.Server.Configuration
@@ -48,6 +50,7 @@ namespace FoodApp.Server.Configuration
             services.AddScoped<IDataContext>(s => s.GetRequiredService<DataContextFactory>().CreateDbContext());
 
             services.AddMediatR(typeof(Startup));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             ConfigureIdentity(services);
 
             return services;

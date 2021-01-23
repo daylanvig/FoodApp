@@ -1,4 +1,4 @@
-﻿using FoodApp.Core.Domain.Foods;
+﻿using FoodApp.Core.Domain.QuantityTypes;
 using FoodApp.Core.Interfaces;
 using System.Collections;
 using System.Collections.Generic;

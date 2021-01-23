@@ -1,7 +1,4 @@
-﻿using FoodApp.Core.Domain.Foods;
-using FoodApp.Core.Interfaces;
-using FoodApp.Server.Features.Foods;
-using FoodApp.Shared.Models.Foods;
+﻿using FoodApp.Shared.Models.Foods;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

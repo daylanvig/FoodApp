@@ -1,4 +1,5 @@
 ﻿using FoodApp.Core.Domain.Foods;
+using FoodApp.Core.Domain.QuantityTypes;
 
 namespace Tests.FoodApp.TestInfrastructure
 {

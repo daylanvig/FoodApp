@@ -9,7 +9,7 @@ namespace FoodApp.Server.Features.Foods
         public MapProfile()
         {
             CreateMap<Food, FoodModel>()
-                .ForMember(d => d.QuanityType, o => o.MapFrom(s => s.QuantityType.Type));
+                .ForMember(d => d.QuantityType, o => o.MapFrom(s => s.QuantityType.Type));
         }
     }
 }

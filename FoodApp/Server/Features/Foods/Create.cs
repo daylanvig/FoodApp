@@ -2,6 +2,7 @@
 using FluentValidation;
 using FoodApp.Core.Common;
 using FoodApp.Core.Domain.Foods;
+using FoodApp.Core.Domain.QuantityTypes;
 using FoodApp.Core.Interfaces;
 using FoodApp.Services.Foods;
 using FoodApp.Shared.Models.Foods;
