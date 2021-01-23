@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AppDesignerFolder>AppProperties</AppDesignerFolder>
   </PropertyGroup>
 
   <ItemGroup>
