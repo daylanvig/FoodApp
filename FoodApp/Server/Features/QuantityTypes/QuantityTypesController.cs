@@ -19,10 +19,9 @@ namespace FoodApp.Server.Features.QuantityTypes
 
         // GET: api/QuantityTypes
         [HttpGet]
-        public IEnumerable<string> Get()
+        public Task<IEnumerable<QuantityTypeModel>> Get()
         {
-            // todo -> implement
-            throw new NotImplementedException();
+            return _mediator.Send(new Listing.Query());
         }
 
         // GET api/QuantityTypes/5
