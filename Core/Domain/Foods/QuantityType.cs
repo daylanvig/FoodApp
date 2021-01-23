@@ -1,4 +1,5 @@
 ﻿using Core.Domain.Common;
+using FoodApp.Core.Common;
 
 namespace FoodApp.Core.Domain.Foods
 {
@@ -24,6 +25,13 @@ namespace FoodApp.Core.Domain.Foods
         public static QuantityType CreateNew(string type)
         {
             return new QuantityType(type);
+        }
+
+        public void UpdateType(string type)
+        {
+            IsCreated();
+            Guard.AgainstNullOrEmpty(type, nameof(Type));
+            Type = type;
         }
     }
 }
