@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using FluentValidation;
 using FoodApp.Core.Common;
 using FoodApp.Core.Domain.Foods;
 using FoodApp.Core.Interfaces;
@@ -38,17 +39,19 @@ namespace FoodApp.Server.Features.Foods
 
         public class Handler : IRequestHandler<Command, FoodModel>
         {
-
             private readonly IRepository<Food> _foodRepository;
             private readonly IQuantityTypeService _quantityTypeService;
+            private readonly IMapper _mapper;
 
             public Handler(
                 IRepository<Food> foodRepository,
-                IQuantityTypeService quantityTypeService
+                IQuantityTypeService quantityTypeService,
+                IMapper mapper
             )
             {
                 _foodRepository = foodRepository;
                 _quantityTypeService = quantityTypeService;
+                _mapper = mapper;
             }
 
             public async Task<FoodModel> Handle(Command request, CancellationToken cancellationToken = default)
@@ -65,7 +68,7 @@ namespace FoodApp.Server.Features.Foods
                 // Create the food
                 var food = Food.CreateNew(request.Name, request.AmountOnHand, quantityType);
                 await _foodRepository.AddAsync(food);
-                return new FoodModel(food.Id, food.Name, food.AmountOnHand, quantityType.Type);
+                return _mapper.Map<FoodModel>(food);
             }
         }
     }

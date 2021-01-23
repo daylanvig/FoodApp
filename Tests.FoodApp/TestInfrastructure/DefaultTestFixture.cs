@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
+using AutoMapper;
 using Core.Domain.Common;
 using FoodApp.Core.Interfaces;
 using Moq;
@@ -39,7 +40,14 @@ namespace Tests.FoodApp.TestInfrastructure
         public virtual TSut CreateSut()
         {
             return Build<TSut>().Create();
-        }  
+        }
+
+        public Mock<IMapper> DoMockMapper()
+        {
+            var mockMapper = new Mock<IMapper>();
+            SetMock(mockMapper);
+            return mockMapper;
+        }
 
         public Mock<TMock> DoMock<TMock, TReturns>(TReturns returns) where TMock : class
         {

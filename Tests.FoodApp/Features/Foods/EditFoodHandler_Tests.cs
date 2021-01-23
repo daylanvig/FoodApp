@@ -3,9 +3,6 @@ using FoodApp.Server.Features.Foods;
 using FoodApp.Services.Foods;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Tests.FoodApp.TestInfrastructure;
 using Xunit;
@@ -56,22 +53,22 @@ namespace Tests.FoodApp.Features.Foods
         public void UpdateFoodName()
         {
             // Arrange
-            DoMockRepository(CreateEntity.CreateExistingFood());
+            var mockRepository = DoMockRepository(CreateEntity.CreateExistingFood());
             // Act
             var result = Sut.Handle(_editFood).Result;
             // Assert
-            Assert.Equal(_editFood.Name, result.Name);
+            mockRepository.Verify(m => m.EditAsync(It.Is<Food>(f => f.Name == _editFood.Name)));
         }
 
         [Fact]
         public void UpdateAmountOnHand()
         {
             // Arrange
-            DoMockRepository(CreateEntity.CreateExistingFood());
+            var mockRepository = DoMockRepository(CreateEntity.CreateExistingFood());
             // Act
             var result = Sut.Handle(_editFood).Result;
             // Assert
-            Assert.Equal(_editFood.AmountOnHand, result.AmountOnHand);
+            mockRepository.Verify(m => m.EditAsync(It.Is<Food>(f => f.AmountOnHand == _editFood.AmountOnHand)));
         }
     }
 }
