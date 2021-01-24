@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Shared.Models.Foods
 {
-    public class RecipeModel
+    public class RecipeModel : IEntityModel
     {
         public int Id { get; set; }
         [Required, StringLength(150)]

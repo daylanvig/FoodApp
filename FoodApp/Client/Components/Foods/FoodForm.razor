@@ -2,7 +2,7 @@
 
 <MudContainer>
     <MudForm @ref="form" id="Food_Form">
-        @if (food.Id == 0)
+        @if (IsNew())
         {
             <h2>Add New Food</h2>
         }
@@ -13,15 +13,47 @@
         <section aria-label="Food Form">
             <MudTextField T="string" Label="Name" Required="true"  @bind-Value="food.Name" name="Food.Name" />
             <div>
-                <MudTextField T="decimal?" Label="On Hand" Required="true" @bind-Value="food.AmountOnHand" name="Food.AmountOnHand" />
-                @*TODO: Replace this with an auto complete dropdown component*@
+                <MudTextField 
+                              T="decimal?" 
+                              Label="On Hand" 
+                              Required="true"
+                              @bind-Value="food.AmountOnHand" 
+                              name="Food.AmountOnHand"
+                              Format="F2"/>
+                @*TODO: Replace this with an auto complete dropdown component with add support*@
                 <MudTextField Label="Units" Required="true" @bind-Value="food.QuantityType" name="Food.Units" />
             </div>
         </section>
-        <div class="d-flex justify-end mt-4">
-            <MudButton OnClick="SaveForm" Variant="Variant.Filled" Color="Color.Primary" name="Food.Save">
-                @(food.Id == 0 ? "Add Now" : "Save Changes")
-            </MudButton>
+        <div class="mt-4 d-flex justify-space-between">
+            <div>
+                @if (!IsNew())
+                {
+                    <MudButton OnClick="DeleteFood"
+                               Variant="Variant.Text"
+                               Color="Color.Secondary"
+                               name="Food.Delete">
+                        Delete
+                    </MudButton>
+                }
+            </div>
+            <div>
+                @if (!IsNew())
+                {
+                    <MudButton OnClick="Clear"
+                               Variant="Variant.Text"
+                               Color="Color.Secondary"
+                               name="Food.Cancel"
+                               Class="mr-3">
+                        Cancel
+                    </MudButton>
+                }
+                <MudButton OnClick="SaveFood"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           name="Food.Save">
+                    @(IsNew() ? "Add Now" : "Save Changes")
+                </MudButton>
+            </div>
         </div>
     </MudForm>
 </MudContainer>

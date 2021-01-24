@@ -6,7 +6,8 @@
 <h1>Inventory</h1>
 <MudContainer MaxWidth="MaxWidth.Medium">
 
-    <FoodApp.Client.Components.Foods.FoodForm Food="@new()" OnSave="@Update"></FoodApp.Client.Components.Foods.FoodForm>
+    <FoodApp.Client.Components.Foods.FoodForm Food="@Food" OnFoodsChange="@Update" @ref="FoodForm">
+    </FoodApp.Client.Components.Foods.FoodForm>
     <MudDivider Class="mt-4 mb-4"></MudDivider>
     <MudContainer>
         <h2>Your Pantry</h2>
@@ -30,7 +31,8 @@
                 {
                     @foreach (var food in foods.OrderBy(f => f.Name))
                     {
-                        <tr>
+                        var f = food;
+                        <tr @onclick="() => BeginEditingFood(f)">
                             <td>@food.Name</td>
                             <td>@($"{food.AmountOnHand.Value:F2} {food.QuantityType}")</td>
                         </tr>

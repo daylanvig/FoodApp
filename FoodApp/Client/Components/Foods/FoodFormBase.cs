@@ -1,7 +1,11 @@
 ﻿using FoodApp.Client.Services.System;
+using FoodApp.Shared.Helpers;
 using FoodApp.Shared.Models.Foods;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FoodApp.Client.Components.Foods
@@ -12,8 +16,9 @@ namespace FoodApp.Client.Components.Foods
         public IApiRequestService ApiRequestService { get; set; }
         [Inject]
         public ISnackbar Snackbar { get; set; }
+
         [Parameter]
-        public EventCallback OnSave { get; set; }
+        public EventCallback OnFoodsChange { get; set; }
 
         protected FoodModel food;
         [Parameter]
@@ -26,14 +31,60 @@ namespace FoodApp.Client.Components.Foods
             await base.OnInitializedAsync();
         }
 
+        public void SetFood(FoodModel foodModel)
+        {
+            food = foodModel;
+            StateHasChanged();
+        }
 
-        protected async Task SaveForm()
+        protected bool IsNew()
+        {
+            return EntityModelHelper.IsNew(food);
+        }
+
+        protected void Clear()
+        {
+            food = new();
+            form.Reset();
+        }
+
+        protected async Task DeleteFood()
+        {
+            try
+            {
+                await ApiRequestService.Delete<FoodModel>(food.Id);
+                Snackbar.Add($"Food successfully deleted!", Severity.Normal);
+                Clear();
+                await OnFoodsChange.InvokeAsync();
+            }
+            catch
+            {
+                Snackbar.Add("Failed to delete", Severity.Error);
+            }
+        }
+
+        protected async Task SaveFood()
         {
             var foodName = food.Name;
-            food = await ApiRequestService.PostJsonAsync<FoodModel, FoodModel>("/api/Foods/", food);
-            Snackbar.Add($"\"{foodName}\" successfully saved!", Severity.Success);
-            form.Reset();
-            await OnSave.InvokeAsync();
+            try
+            {
+                if (food.Id == 0)
+                {
+                    food = await ApiRequestService.Add(food);
+                }
+                else
+                {
+                    food = await ApiRequestService.Edit(food.Id, food);
+                }
+                
+                Snackbar.Add($"\"{foodName}\" successfully saved!", Severity.Success);
+                Clear();
+                await OnFoodsChange.InvokeAsync();
+            }
+            catch
+            {
+                Snackbar.Add("Failed to save", Severity.Error);
+            }
         }
     }
 }

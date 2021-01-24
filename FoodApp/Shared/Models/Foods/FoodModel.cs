@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FoodApp.Shared.Models.Foods
 {
-    public class FoodModel
+    public class FoodModel : IEntityModel
     {
         public int Id { get; set; }
         [Required, StringLength(150)]

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\FoodApp.Core.csproj" />
     <ProjectReference Include="..\Shared\FoodApp.Shared.csproj" />
   </ItemGroup>
 
