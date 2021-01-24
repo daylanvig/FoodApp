@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using FoodApp.Client.Configuration;
 using FoodApp.Client.Services.System;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -35,6 +36,7 @@ namespace FoodApp.Client
                     c.SnackbarVariant = Variant.Filled;
                 })
                 .AddMudBlazorResizeListener();
+            builder.Services.AddBlazoredLocalStorage();
             await builder.Build().RunAsync();
         }
     }

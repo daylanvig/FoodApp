@@ -9,6 +9,7 @@ namespace FoodApp.Client.Configuration
         public static void AddAppServices(this IServiceCollection services)
         {
             services.AddScoped<IApiRequestService, ApiRequestService>();
+            services.AddScoped<IEntityCache, EntityCache>();
         }
     }
 }

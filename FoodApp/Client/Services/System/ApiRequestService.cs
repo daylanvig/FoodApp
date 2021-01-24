@@ -11,10 +11,12 @@ namespace FoodApp.Client.Services.System
     public class ApiRequestService : IApiRequestService
     {
         private readonly HttpClient _client;
+        private readonly IEntityCache _entityCache;
 
-        public ApiRequestService(HttpClient client)
+        public ApiRequestService(HttpClient client, IEntityCache entityCache)
         {
             _client = client;
+            _entityCache = entityCache;
         }
 
         public Task<TEntity> GetById<TEntity>(int id)
@@ -24,15 +26,23 @@ namespace FoodApp.Client.Services.System
             return _client.GetFromJsonAsync<TEntity>($"/{controller}/{id}");
         }
 
-        public Task<IReadOnlyList<TEntity>> GetList<TEntity>()
+        public async Task<IReadOnlyList<TEntity>> GetList<TEntity>()
         {
-            return _client.GetFromJsonAsync<IReadOnlyList<TEntity>>($"/{EntityControllerMap.GetController<TEntity>()}/");
+            var cachedEntities = await _entityCache.GetCachedList<TEntity>();
+            if(cachedEntities != null)
+            {
+                return cachedEntities;
+            }
+            var entities = await _client.GetFromJsonAsync<IReadOnlyList<TEntity>>($"/{EntityControllerMap.GetController<TEntity>()}/");
+            await _entityCache.CacheList(entities);
+            return entities;
         }
 
         public async Task<TEntity> Add<TEntity>(TEntity entity)
         {
             var result = await _client.PostAsJsonAsync($"/{EntityControllerMap.GetController<TEntity>()}/", entity);
             result.EnsureSuccessStatusCode();
+            await _entityCache.InvalidateCache<TEntity>();
             return JsonSerializer.Deserialize<TEntity>(await result.Content.ReadAsStringAsync());
         }
 
@@ -40,12 +50,14 @@ namespace FoodApp.Client.Services.System
         {
             var result = await _client.PutAsJsonAsync($"/{EntityControllerMap.GetController<TEntity>()}/{id}", entity);
             result.EnsureSuccessStatusCode();
+            await _entityCache.InvalidateCache<TEntity>();
             return JsonSerializer.Deserialize<TEntity>(await result.Content.ReadAsStringAsync());
         }
 
-        public Task Delete<TEntity>(int id)
+        public async Task Delete<TEntity>(int id)
         {
-            return _client.DeleteAsync($"/{EntityControllerMap.GetController<TEntity>()}/{id}");
+            await _entityCache.InvalidateCache<TEntity>();
+            await _client.DeleteAsync($"/{EntityControllerMap.GetController<TEntity>()}/{id}");
         }
 
         public Task<T> GetFromJsonAsync<T>(string url)
