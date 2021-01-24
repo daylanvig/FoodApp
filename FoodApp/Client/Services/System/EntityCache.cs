@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Client.Services.System
 {
+    // future -> this could be handled by PWA, check for blazor libraries
     public class EntityCache : IEntityCache
     {
         private const int CACHE_MINUTES = 60;
@@ -18,8 +19,8 @@ namespace FoodApp.Client.Services.System
             _localStorage = localStorage;
         }
 
-        
-        private static string GetCacheKey(Type t) => t.GUID.ToString();
+
+        private static string GetCacheKey(Type t) => t.AssemblyQualifiedName;
 
         public async Task InvalidateCache<TEntity>()
         {
@@ -30,7 +31,7 @@ namespace FoodApp.Client.Services.System
         {
             await _localStorage.SetItemAsync(GetCacheKey(typeof(TEntity)), new CacheItem<TEntity>(entities, DateTime.Now));
         }
-
+        
         public async Task<IReadOnlyList<TEntity>> GetCachedList<TEntity>()
         {
             var cacheItem = await _localStorage.GetItemAsync<CacheItem<TEntity>>(GetCacheKey(typeof(TEntity)));
