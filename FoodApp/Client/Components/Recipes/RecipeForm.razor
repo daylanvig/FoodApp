@@ -1,7 +1,21 @@
 ﻿@inherits RecipeFormBase
+@using FoodApp.Shared.Models.Foods
 
-<h3>Create Recipe</h3>
+<MudContainer>
+    <MudForm>
+        <MudTextField T="string"
+                      Label="Name"
+                      Required="true"
+                      @bind-Value="recipe.Name"></MudTextField>
 
-@code {
-
-}
+        <MudText Typo="Typo.h3">Ingredients</MudText>
+        <div>
+            @foreach (var ingredient in recipe.Ingredients)
+            {
+                <RecipeIngredientRow RecipeIngredient="ingredient"></RecipeIngredientRow>
+            }
+            @* Row to start adding new item *@
+            <RecipeIngredientRow RecipeIngredient="new()"></RecipeIngredientRow>
+        </div>
+    </MudForm>
+</MudContainer>

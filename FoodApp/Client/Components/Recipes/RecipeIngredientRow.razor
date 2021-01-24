@@ -1,0 +1,19 @@
+﻿@inherits RecipeIngredientRowBase
+@using FoodApp.Shared.Models.Foods
+
+
+<div class="d-flex">
+    <MudSelect T="RecipeIngredientModel" ToStringFunc="RecipeIngredientDisplay" Class="mr-3">
+        @foreach (var food in foods)
+        {
+            <MudSelectItem Value="@(new RecipeIngredientModel { FoodId = food.Id })"></MudSelectItem>
+        }
+    </MudSelect>
+    <MudInput T="decimal?" Placeholder="Amount" Class="mr-3"></MudInput>
+    <MudSelect T="QuantityTypeModel" ToStringFunc="StringConverter.QuantityType">
+        @foreach (var quantityType in quantityTypes)
+        {
+            <MudSelectItem Value="quantityType"></MudSelectItem>
+        }
+    </MudSelect>
+</div>

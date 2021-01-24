@@ -1,17 +1,16 @@
 ﻿using FoodApp.Client.Services.System;
 using FoodApp.Shared.Models.Foods;
 using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace FoodApp.Client.Pages.Foods
+namespace FoodApp.Client.Pages.Recipes
 {
     public class RecipesBase : ComponentBase
     {
         [Inject] IApiRequestService ApiRequestService { get; set; }
+        [Inject] NavigationManager NavigationManager { get; set; }
+
         protected IReadOnlyList<RecipeModel> recipes;
 
        
@@ -23,8 +22,7 @@ namespace FoodApp.Client.Pages.Foods
 
         protected void ShowAddRecipe()
         {
-            // todo
-            throw new NotImplementedException();
+            NavigationManager.NavigateTo("/Recipes/Add");
         }
     }
 }
