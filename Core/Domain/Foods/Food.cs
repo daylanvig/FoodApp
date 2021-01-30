@@ -3,6 +3,7 @@ using Core.Domain.Common;
 using FoodApp.Core.Common;
 using FoodApp.Core.Domain.QuantityTypes;
 using System;
+using System.Collections.Generic;
 
 namespace FoodApp.Core.Domain.Foods
 {

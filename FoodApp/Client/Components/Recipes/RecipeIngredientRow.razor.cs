@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Client.Components.Recipes
 {
-    public class RecipeIngredientRowBase : ComponentBase
+    public partial class RecipeIngredientRow : ComponentBase
     {
         [Inject]
         IApiRequestService ApiRequestService { get; set; }

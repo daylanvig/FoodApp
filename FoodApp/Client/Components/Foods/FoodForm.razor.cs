@@ -3,14 +3,11 @@ using FoodApp.Shared.Helpers;
 using FoodApp.Shared.Models.Foods;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FoodApp.Client.Components.Foods
 {
-    public class FoodFormBase : ComponentBase
+    public partial class FoodForm : ComponentBase
     {
         [Inject]
         public IApiRequestService ApiRequestService { get; set; }

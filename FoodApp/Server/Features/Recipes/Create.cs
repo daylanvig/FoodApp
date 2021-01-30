@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FoodApp.Core.Common;
 using FoodApp.Core.Domain.Foods;
+using FoodApp.Core.Domain.Recipes;
 using FoodApp.Core.Interfaces;
 using FoodApp.Services.Foods;
 using FoodApp.Services.Recipes;
@@ -16,7 +17,7 @@ namespace FoodApp.Server.Features.Recipes
 {
     public class Create
     {
-        public record Command(string Name, IEnumerable<RecipeIngredientModel> Ingredients, string Url) : IRequest<RecipeModel>;
+        public record Command(string Name, IEnumerable<RecipeIngredientModel> Ingredients, string Url, IEnumerable<RecipeStepModel> Steps) : IRequest<RecipeModel>;
 
         public class CommandValidator : AbstractValidator<Command>
         {
@@ -66,7 +67,9 @@ namespace FoodApp.Server.Features.Recipes
                     recipeIngredients.Add(RecipeIngredient.CreateNew(recipeIngredient.FoodId, 0, recipeIngredient.Amount, quantityType.Id));
                 }
 
-                var recipe = Recipe.CreateNew(request.Name, recipeIngredients, request.Url);
+                var steps = request.Steps.Select(s => RecipeStep.CreateNew(s.StepNumber, s.Direction));
+                
+                var recipe = Recipe.CreateNew(request.Name, recipeIngredients, request.Url, steps);
                 await _recipeRepository.AddAsync(recipe);
 
                 return new RecipeModel

@@ -34,5 +34,16 @@
                 }
             </tbody>
         </MudSimpleTable>
+        @if (recipes != null && recipes.Any())
+        {
+            <div class="d-flex justify-end mt-3">
+                <MudButton 
+                           ButtonType="ButtonType.Button"
+                           OnClick="ShowAddRecipe"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           >Add Recipe</MudButton>
+            </div>
+        }
     </MudContainer>
 </MudContainer>

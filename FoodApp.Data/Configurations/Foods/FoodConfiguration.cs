@@ -17,6 +17,10 @@ namespace FoodApp.Data.Configurations.Foods
                 .Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(150);
+
+            builder.HasMany<RecipeIngredient>()
+                   .WithOne(f => f.Food)
+                   .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Restrict);
         }
     }
 }

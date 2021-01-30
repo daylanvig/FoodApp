@@ -1,6 +1,4 @@
-﻿@inherits FoodFormBase
-
-<MudContainer>
+﻿<MudContainer>
     <MudForm @ref="form" id="Food_Form">
         @if (IsNew())
         {
@@ -23,36 +21,13 @@
                 <MudTextField Label="Units" Required="true" @bind-Value="food.QuantityType" name="Food.Units" />
             </div>
         </section>
-        <div class="mt-4 d-flex justify-space-between">
-            <div>
-                @if (!IsNew())
-                {
-                    <MudButton OnClick="DeleteFood"
-                               Variant="Variant.Text"
-                               Color="Color.Secondary"
-                               name="Food.Delete">
-                        Delete
-                    </MudButton>
-                }
-            </div>
-            <div>
-                @if (!IsNew())
-                {
-                    <MudButton OnClick="Clear"
-                               Variant="Variant.Text"
-                               Color="Color.Secondary"
-                               name="Food.Cancel"
-                               Class="mr-3">
-                        Cancel
-                    </MudButton>
-                }
-                <MudButton OnClick="SaveFood"
-                           Variant="Variant.Filled"
-                           Color="Color.Primary"
-                           name="Food.Save">
-                    @(IsNew() ? "Add Now" : "Save Changes")
-                </MudButton>
-            </div>
-        </div>
+        <SaveFooter
+                SaveLabel="@(IsNew() ? SaveFooter.ADD_LABEL : SaveFooter.SAVE_LABEL)"
+                OnSaveClick="SaveFood"
+                OnCancelClick="Clear"
+                IsCancelVisible="!IsNew()"
+                OnDeleteClick="DeleteFood"
+                IsDeleteVisible="!IsNew()">
+        </SaveFooter>
     </MudForm>
 </MudContainer>

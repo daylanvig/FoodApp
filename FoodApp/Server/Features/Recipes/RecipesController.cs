@@ -38,7 +38,7 @@ namespace FoodApp.Server.Features.Recipes
         [HttpPost]
         public Task<RecipeModel> Post([FromBody] RecipeModel food)
         {
-            return _mediator.Send(new Create.Command(food.Name, food.Ingredients, food.Url));
+            return _mediator.Send(new Create.Command(food.Name, food.Ingredients, food.Url, food.Steps));
         }
 
         // PUT api/Recipes/5

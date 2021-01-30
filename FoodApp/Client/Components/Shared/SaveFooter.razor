@@ -1,0 +1,31 @@
+﻿
+
+
+<div class="mt-4 d-flex justify-space-between">
+    <div>
+        @if (IsDeleteVisible)
+        {
+            <MudButton OnClick="OnDeleteClick"
+                       Variant="Variant.Text"
+                       Color="Color.Secondary">
+                Delete
+            </MudButton>
+        }
+    </div>
+    <div>
+        @if (IsCancelVisible)
+        {
+            <MudButton OnClick="OnCancelClick"
+                       Variant="Variant.Text"
+                       Color="Color.Secondary"
+                       Class="mr-3">
+                Cancel
+            </MudButton>
+        }
+        <MudButton OnClick="OnSaveClick"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary">
+            @SaveLabel
+        </MudButton>
+    </div>
+</div>

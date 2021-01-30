@@ -2,20 +2,16 @@
 using FoodApp.Client.Services.System;
 using FoodApp.Client.Shared;
 using FoodApp.Core.Common;
-using FoodApp.Shared.Models.Foods;
 using FoodApp.Shared.Models.Recipes;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FoodApp.Client.Components.Recipes
 {
-    public class RecipeFormBase : ComponentBase
+    public partial class RecipeForm: ComponentBase
     {
         #region Dependencies
         [Inject]
