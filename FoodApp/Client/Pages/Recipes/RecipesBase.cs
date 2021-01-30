@@ -1,5 +1,5 @@
 ﻿using FoodApp.Client.Services.System;
-using FoodApp.Shared.Models.Foods;
+using FoodApp.Shared.Models.Recipes;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Threading.Tasks;

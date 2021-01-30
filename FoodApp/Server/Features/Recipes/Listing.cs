@@ -1,6 +1,6 @@
 ﻿using FoodApp.Core.Domain.Foods;
 using FoodApp.Core.Interfaces;
-using FoodApp.Shared.Models.Foods;
+using FoodApp.Shared.Models.Recipes;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;

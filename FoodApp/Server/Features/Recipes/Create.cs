@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
+using FoodApp.Core.Common;
 using FoodApp.Core.Domain.Foods;
 using FoodApp.Core.Interfaces;
 using FoodApp.Services.Foods;
 using FoodApp.Services.Recipes;
-using FoodApp.Shared.Models.Foods;
+using FoodApp.Shared.Models.Recipes;
 using MediatR;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
 ﻿using FoodApp.Shared.Models.Foods;
+using FoodApp.Shared.Models.Recipes;
 using System;
 using System.Collections.Generic;
 

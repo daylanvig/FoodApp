@@ -2,18 +2,36 @@
 @using FoodApp.Shared.Models.Foods
 
 
-<div class="d-flex">
-    <MudSelect T="RecipeIngredientModel" ToStringFunc="RecipeIngredientDisplay" Class="mr-3">
-        @foreach (var food in foods)
-        {
-            <MudSelectItem Value="@(new RecipeIngredientModel { FoodId = food.Id })"></MudSelectItem>
-        }
-    </MudSelect>
-    <MudInput T="decimal?" Placeholder="Amount" Class="mr-3"></MudInput>
-    <MudSelect T="QuantityTypeModel" ToStringFunc="StringConverter.QuantityType">
-        @foreach (var quantityType in quantityTypes)
-        {
-            <MudSelectItem Value="quantityType"></MudSelectItem>
-        }
-    </MudSelect>
-</div>
+<MudForm @ref="form" IsValidChanged="OnValidChanged">
+    <div class="d-flex">
+        <MudSelect T="int"
+                   Required="true"
+                   ToStringFunc="RecipeIngredientDisplay" Class="mr-3"
+                   @bind-Value="recipeIngredient.FoodId">
+            @foreach (var food in foods)
+            {
+                <MudSelectItem T="int" Value="food.Id"></MudSelectItem>
+            }
+        </MudSelect>
+        <MudInput T="decimal?"
+                  Required="true"
+                  Placeholder="Amount"
+                  Class="mr-3"
+                  @bind-Value="Amount"></MudInput>
+        <MudSelect T="QuantityTypeModel"
+                   Required="true"
+                   ToStringFunc="StringConverter.QuantityType"
+                   @bind-Value="RecipeIngredientQuantityType">
+            @foreach (var quantityType in quantityTypes)
+            {
+                <MudSelectItem Value="quantityType"></MudSelectItem>
+            }
+        </MudSelect>
+        <MudIconButton Icon="@(Index.HasValue ? Icons.Material.Delete : Icons.Material.Clear)"
+                       OnClick="DeleteRow"></MudIconButton>
+        <MudIconButton Icon="@Icons.Material.Check"
+                       Disabled="form.IsValid"
+                       OnClick="SaveChanges"
+                       Color="Color.Success"></MudIconButton>
+    </div>
+</MudForm>

@@ -1,4 +1,4 @@
-﻿using FoodApp.Shared.Models.Foods;
+﻿using FoodApp.Shared.Models.Recipes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;

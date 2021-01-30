@@ -1,19 +1,17 @@
-﻿using System;
+﻿using FoodApp.Shared.Models.Foods;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FoodApp.Shared.Models.Foods
+namespace FoodApp.Shared.Models.Recipes
 {
     public class RecipeModel : IEntityModel
     {
         public int Id { get; set; }
         [Required, StringLength(150)]
         public string Name { get; set; }
-        public List<RecipeIngredientModel> Ingredients { get; set; } = new List<RecipeIngredientModel>();
+        public List<RecipeIngredientModel> Ingredients { get; set; } = new();
         [DataType(DataType.Url)] // optional
         public string Url { get; set; }
+        public List<RecipeStepModel> Steps { get; set; } = new();
     }
 }

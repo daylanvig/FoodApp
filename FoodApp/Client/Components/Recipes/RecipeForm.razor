@@ -1,8 +1,9 @@
 ﻿@inherits RecipeFormBase
-@using FoodApp.Shared.Models.Foods
+@using FoodApp.Shared.Models.Recipes
+@using FoodApp.Core.Common
 
 <MudContainer>
-    <MudForm>
+    <MudForm @ref="form">
         <MudTextField T="string"
                       Label="Name"
                       Required="true"
@@ -10,12 +11,47 @@
 
         <MudText Typo="Typo.h3">Ingredients</MudText>
         <div>
-            @foreach (var ingredient in recipe.Ingredients)
+            @foreach (var (ingredient, index) in recipe.Ingredients.WithIndex())
             {
-                <RecipeIngredientRow RecipeIngredient="ingredient"></RecipeIngredientRow>
+                <RecipeIngredientRow RecipeIngredient="ingredient"
+                                     Index="index"
+                                     OnRowComplete="OnIngredientComplete"
+                                     OnDeleteRequested="OnIngredientRequestsDelete"></RecipeIngredientRow>
             }
             @* Row to start adding new item *@
-            <RecipeIngredientRow RecipeIngredient="new()"></RecipeIngredientRow>
+            <RecipeIngredientRow RecipeIngredient="new()"
+                                 OnRowComplete="OnIngredientComplete"
+                                 OnDeleteRequested="OnIngredientRequestsDelete"></RecipeIngredientRow>
+        </div>
+        <div>
+            <MudText Typo="Typo.h3">Directions</MudText>
+            @* FUTURE Add support for entering it as a single body that is parsed *@
+            @foreach (var step in recipe.Steps)
+            {
+                var stepNumber = step.StepNumber;
+                <div class="d-flex align-center">
+                    <MudText Typo="Typo.body1" Class="mr-3">@step.StepNumber</MudText>
+                    <MudTextFieldString @key="step" 
+                                        @bind-Value="step.Direction" 
+                                        OnKeyPress="OnKeyPressDirectionInput"
+                                        Required></MudTextFieldString>
+                    <MudIconButton Icon="@(recipe.Steps.Count == 1 ? Icons.Material.Clear : Icons.Material.Delete)"
+                                   OnClick="() => OnDeleteStepRequested(stepNumber)"></MudIconButton>
+                </div>
+            }
+            <div class="d-flex justify-end mt-3">
+                <MudButton Variant="Variant.Filled"
+                           ButtonType="ButtonType.Button"
+                           OnClick="OnAddStepRequested">Add Step</MudButton>
+            </div>
+        </div>
+        <div class="d-flex justify-end mt-4">
+            <MudButton 
+                       ButtonType="ButtonType.Button"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Size="Size.Large"
+                       OnClick="SaveRecipe">Save Recipe</MudButton>
         </div>
     </MudForm>
 </MudContainer>
