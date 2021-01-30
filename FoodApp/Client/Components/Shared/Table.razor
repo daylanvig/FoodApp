@@ -1,0 +1,19 @@
+﻿@typeparam TEntity
+@typeparam TSortProp
+
+<MudTable Items="TableValues" SortLabel="Sort By">
+    <HeaderContent>
+        @foreach(var tableHeader in TableHeaders)
+        {
+            <MudTh>
+                <MudTableSortLabel SortBy="@tableHeader.SortBy">@tableHeader.Label</MudTableSortLabel>
+            </MudTh>
+        }
+    </HeaderContent>
+    <RowTemplate>
+        @foreach (var tableEntry in TableTemplates)
+        {
+            <MudTd DataLabel="@tableEntry.Label">@tableEntry.StringFormatter(context)</MudTd>
+        }
+    </RowTemplate>
+</MudTable>

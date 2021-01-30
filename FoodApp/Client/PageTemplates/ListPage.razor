@@ -1,5 +1,10 @@
-﻿<h3>ListPage</h3>
+﻿
 
-@code {
-
-}
+<MudContainer MaxWidth="MaxWidth.Medium">
+    <MudText Typo="Typo.h1">@Title</MudText>
+    @ChildContent
+    <SaveFooter SaveLabel="@(SaveFooter.ADD_LABEL)"
+                OnSaveClick="OnAddClick"
+                IsSaveVisible="@IsSaveVisible">
+    </SaveFooter>
+</MudContainer>

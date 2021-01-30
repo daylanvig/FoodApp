@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FoodApp.Client.Components.Shared
 {
@@ -13,6 +9,8 @@ namespace FoodApp.Client.Components.Shared
 
         [Parameter]
         public EventCallback OnSaveClick { get; set; }
+        [Parameter]
+        public bool IsSaveVisible { get; set; } = true;
         [Parameter]
         public string SaveLabel { get; set; } = SAVE_LABEL;
 

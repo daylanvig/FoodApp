@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Client.Pages.Foods
 {
-    public class InventoryBase : ComponentBase
+    public partial class Inventory : ComponentBase
     {
         [Inject]
         IApiRequestService ApiRequestService { get; set; }

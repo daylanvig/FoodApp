@@ -1,49 +1,43 @@
 ﻿@page "/Recipes"
-@inherits RecipesBase
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 
-<h1>Recipes</h1>
-<MudContainer MaxWidth="MaxWidth.Medium">
-    <MudContainer>
-        <h2>Your Recipes</h2>
-        <MudSimpleTable>
-            <thead>
+<FoodApp.Client.PageTemplates.ListPage Title="Recipes">
+    <MudSimpleTable>
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (recipes == null)
+            {
                 <tr>
-                    <th>Name</th>
+                    <MudProgressCircular></MudProgressCircular>
                 </tr>
-            </thead>
-            <tbody>
-                @if (recipes == null)
+            }
+            else if (recipes.Count == 0)
+            {
+                <tr>You don't have any recipes. <MudLink tabindex="0" @onclick="ShowAddRecipe">Add one now?</MudLink></tr>
+            }
+            else
+            {
+                @foreach (var recipe in recipes.OrderBy(r => r.Name))
                 {
                     <tr>
-                        <MudProgressCircular></MudProgressCircular>
+                        <td>@recipe.Name</td>
                     </tr>
                 }
-                else if (recipes.Count == 0)
-                {
-                    <tr>You don't have any recipes. <MudLink tabindex="0" @onclick="ShowAddRecipe">Add one now?</MudLink></tr>
-                }
-                else
-                {
-                    @foreach (var recipe in recipes.OrderBy(r => r.Name))
-                    {
-                        <tr>
-                            <td>@recipe.Name</td>
-                        </tr>
-                    }
-                }
-            </tbody>
-        </MudSimpleTable>
-        @if (recipes != null && recipes.Any())
-        {
-            <div class="d-flex justify-end mt-3">
-                <MudButton 
-                           ButtonType="ButtonType.Button"
-                           OnClick="ShowAddRecipe"
-                           Variant="Variant.Filled"
-                           Color="Color.Primary"
-                           >Add Recipe</MudButton>
-            </div>
-        }
-    </MudContainer>
-</MudContainer>
+            }
+        </tbody>
+    </MudSimpleTable>
+    @if (recipes != null && recipes.Any())
+    {
+        <div class="d-flex justify-end mt-3">
+            <MudButton ButtonType="ButtonType.Button"
+                        OnClick="ShowAddRecipe"
+                        Variant="Variant.Filled"
+                        Color="Color.Primary">Add Recipe</MudButton>
+        </div>
+    }
+
+</FoodApp.Client.PageTemplates.ListPage>

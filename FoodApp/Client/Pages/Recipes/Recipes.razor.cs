@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Client.Pages.Recipes
 {
-    public class RecipesBase : ComponentBase
+    public partial class Recipes : ComponentBase
     {
         [Inject] IApiRequestService ApiRequestService { get; set; }
         [Inject] NavigationManager NavigationManager { get; set; }

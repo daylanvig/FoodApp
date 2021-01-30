@@ -1,33 +1,30 @@
-﻿<MudContainer>
-    <MudForm @ref="form" id="Food_Form">
-        @if (IsNew())
-        {
-            <h2>Add New Food</h2>
-        }
-        else
-        {
-            <h2>Edit @food.Name</h2>
-        }
-        <section aria-label="Food Form">
-            <MudTextField T="string" Label="Name" Required="true" @bind-Value="food.Name" name="Food.Name" />
-            <div>
-                <MudTextField T="decimal?"
-                              Label="On Hand"
-                              Required="true"
-                              @bind-Value="food.AmountOnHand"
-                              name="Food.AmountOnHand"
-                              Format="F2" />
-                @*TODO: Replace this with an auto complete dropdown component with add support*@
-                <MudTextField Label="Units" Required="true" @bind-Value="food.QuantityType" name="Food.Units" />
-            </div>
-        </section>
-        <SaveFooter
-                SaveLabel="@(IsNew() ? SaveFooter.ADD_LABEL : SaveFooter.SAVE_LABEL)"
+﻿<MudForm @ref="form" id="Food_Form">
+    @if (IsNew())
+    {
+        <h2>Add New Food</h2>
+    }
+    else
+    {
+        <h2>Edit @food.Name</h2>
+    }
+    <section aria-label="Food Form">
+        <MudTextField T="string" Label="Name" Required="true" @bind-Value="food.Name" name="Food.Name" />
+        <div>
+            <MudTextField T="decimal?"
+                          Label="On Hand"
+                          Required="true"
+                          @bind-Value="food.AmountOnHand"
+                          name="Food.AmountOnHand"
+                          Format="F2" />
+            @*TODO: Replace this with an auto complete dropdown component with add support*@
+            <MudTextField Label="Units" Required="true" @bind-Value="food.QuantityType" name="Food.Units" />
+        </div>
+    </section>
+    <SaveFooter SaveLabel="@(IsNew() ? SaveFooter.ADD_LABEL : SaveFooter.SAVE_LABEL)"
                 OnSaveClick="SaveFood"
                 OnCancelClick="Clear"
                 IsCancelVisible="!IsNew()"
                 OnDeleteClick="DeleteFood"
                 IsDeleteVisible="!IsNew()">
-        </SaveFooter>
-    </MudForm>
-</MudContainer>
+    </SaveFooter>
+</MudForm>
