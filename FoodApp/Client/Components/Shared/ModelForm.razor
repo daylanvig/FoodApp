@@ -1,0 +1,14 @@
+﻿<MudForm @ref="_form">
+    <FoodApp.Client.Components.Shared.Elements.FormTitle Title="@Title">
+    </FoodApp.Client.Components.Shared.Elements.FormTitle>
+    <section aria-label="@($"{Title} Form")">
+        @ChildContent
+    </section>
+    <SaveFooter SaveLabel="@(IsNew ? SaveFooter.ADD_LABEL : SaveFooter.SAVE_LABEL)"
+                OnSaveClick="Save"
+                OnCancelClick="Cancel"
+                IsCancelVisible="!IsNew"
+                OnDeleteClick="Delete"
+                IsDeleteVisible="!IsNew">
+    </SaveFooter>
+</MudForm>

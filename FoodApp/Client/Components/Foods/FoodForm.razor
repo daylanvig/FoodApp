@@ -1,32 +1,28 @@
-﻿<MudForm @ref="form" id="Food_Form">
-    @{ 
-        var label = IsNew() ? "Add New Food" : $"Editing {food.Name}";
-    }
-    <FoodApp.Client.Components.Shared.Elements.FormTitle Title="@label">
-    </FoodApp.Client.Components.Shared.Elements.FormTitle>
-    <section aria-label="Food Form">
+﻿<ModelForm 
+    Title="@(IsNew() ? "Add New Food" : $"Editing {_food.Name}")"
+    OnSave="SaveFood"
+    OnCancel="Clear"
+    OnDelete="DeleteFood"
+    IsNew="@(IsNew())">
         <MudTextField 
-                      T="string" 
-                      Label="Name" 
-                      Required="true" 
-                      @bind-Value="food.Name" 
-                      name="Food.Name" />
+                T="string"
+                Label="Name"
+                Required="true"
+                @bind-Value="_food.Name"
+                name="Food.Name" />
         <div>
-            <MudTextField T="decimal?"
-                          Label="On Hand"
-                          Required="true"
-                          @bind-Value="food.AmountOnHand"
-                          name="Food.AmountOnHand"
-                          Format="F2" />
+            <MudTextField 
+                    T="decimal?"
+                    Label="On Hand"
+                    Required="true"
+                    @bind-Value="_food.AmountOnHand"
+                    name="Food.AmountOnHand"
+                    Format="F2" />
             @*FUTURE: Replace this with an auto complete dropdown component with add support*@
-            <MudTextField Label="Units" Required="true" @bind-Value="food.QuantityType" name="Food.Units" />
+            <MudTextField
+                    Label="Units" 
+                    Required="true" 
+                    @bind-Value="_food.QuantityType" 
+                    name="Food.Units" />
         </div>
-    </section>
-    <SaveFooter SaveLabel="@(IsNew() ? SaveFooter.ADD_LABEL : SaveFooter.SAVE_LABEL)"
-                OnSaveClick="SaveFood"
-                OnCancelClick="Clear"
-                IsCancelVisible="!IsNew()"
-                OnDeleteClick="DeleteFood"
-                IsDeleteVisible="!IsNew()">
-    </SaveFooter>
-</MudForm>
+</ModelForm>

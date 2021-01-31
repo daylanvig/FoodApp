@@ -1,4 +1,5 @@
-﻿using FoodApp.Client.Services.System;
+﻿using FoodApp.Client.Extensions;
+using FoodApp.Client.Services.System;
 using FoodApp.Shared.Helpers;
 using FoodApp.Shared.Models.Foods;
 using Microsoft.AspNetCore.Components;
@@ -25,27 +26,26 @@ namespace FoodApp.Client.Components.Foods
         public FoodModel Food { get; set; }
         #endregion
         #region Fields
-        protected FoodModel food;
-        protected MudForm form;
+        private FoodModel _food;
         #endregion
         #region Public Methods
         public void SetFood(FoodModel foodModel)
         {
-            food = foodModel;
+            _food = foodModel;
             StateHasChanged();
         }
         #endregion
         #region LifeCycle
         protected async override Task OnInitializedAsync()
         {
-            food = Food;
+            _food = Food;
             await base.OnInitializedAsync();
         }
         #endregion
         #region Helpers
         protected bool IsNew()
         {
-            return EntityModelHelper.IsNew(food);
+            return EntityModelHelper.IsNew(_food);
         }
         #endregion
         #region EventHandlers
@@ -54,8 +54,7 @@ namespace FoodApp.Client.Components.Foods
         /// </summary>
         protected void Clear()
         {
-            food = new();
-            form.Reset();
+            _food = new();
         }
 
         /// <summary>
@@ -69,15 +68,15 @@ namespace FoodApp.Client.Components.Foods
         {
             try
             {
-                await ApiRequestService.Delete<FoodModel>(food.Id);
-                Snackbar.Add($"Food successfully deleted!", Severity.Normal);
+                await ApiRequestService.Delete<FoodModel>(_food.Id);
+                Snackbar.ShowDeleteSuccess(_food.Name);
                 Clear();
                 await OnFoodsChange.InvokeAsync();
             }
             catch
             {
                 // Future - descriptive error logging/display
-                Snackbar.Add("Failed to delete", Severity.Error);
+                Snackbar.ShowDeleteFailed();
                 throw;
             }
         }
@@ -91,25 +90,24 @@ namespace FoodApp.Client.Components.Foods
         /// </remarks>
         protected async Task SaveFood()
         {
-            var foodName = food.Name;
+            var foodName = _food.Name;
             try
             {
-                if (food.Id == 0)
+                if (_food.Id == 0)
                 {
-                    food = await ApiRequestService.Add(food);
+                    _food = await ApiRequestService.Add(_food);
                 }
                 else
                 {
-                    food = await ApiRequestService.Edit(food.Id, food);
+                    _food = await ApiRequestService.Edit(_food.Id, _food);
                 }
-                
-                Snackbar.Add($"\"{foodName}\" successfully saved!", Severity.Success);
+                Snackbar.ShowSaveSuccess(foodName);
                 Clear();
                 await OnFoodsChange.InvokeAsync();
             }
             catch
             {
-                Snackbar.Add("Failed to save", Severity.Error);
+                Snackbar.ShowSaveFailed();
                 throw;
             }
         }
