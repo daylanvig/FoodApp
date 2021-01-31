@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Client.Pages.Recipes
 {
+    /// <summary>
+    /// Recipes Page (Index List)
+    /// </summary>
     public partial class Recipes : ComponentBase
     {
         [Inject] IApiRequestService ApiRequestService { get; set; }

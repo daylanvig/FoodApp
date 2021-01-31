@@ -2,14 +2,8 @@
 
 namespace FoodApp.Client.Pages.Recipes
 {
-    public class AddRecipeBase : ComponentBase
+    public partial class AddRecipe : ComponentBase
     {
-
-
-        
-
-
-
 
     }
 }
