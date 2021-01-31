@@ -74,7 +74,6 @@ namespace FoodApp.Client.Components.Foods
             {
                 // Future - descriptive error logging/display
                 Snackbar.ShowDeleteFailed();
-                throw;
             }
         }
 
@@ -105,7 +104,6 @@ namespace FoodApp.Client.Components.Foods
             catch
             {
                 Snackbar.ShowSaveFailed();
-                throw;
             }
         }
 

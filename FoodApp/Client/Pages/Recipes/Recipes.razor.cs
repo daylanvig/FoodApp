@@ -28,23 +28,15 @@ namespace FoodApp.Client.Pages.Recipes
 
             tableHeaders = new List<TableHeader<RecipeModel>>
             {
-                new TableHeader<RecipeModel>
-                {
-                    Label = "Name",
-                    SortBy = new Func<RecipeModel, string>(r => r.Name)
-                }
+                new TableHeader<RecipeModel>("Name", r => r.Name)
             };
 
             tableTemplates = new List<TableTemplate<RecipeModel>>
             {
-                new TableTemplate<RecipeModel>
-                {
-                    Label = "Name",
-                    StringFormatter = t => t.Value.Name
-                }
+                new TableTemplate<RecipeModel>("Name", t => t.Value.Name)
             };
 
-            tableValues = recipes.Select(r => new TableValue<RecipeModel> { Value = r });
+            tableValues = recipes.Select(r => new TableValue<RecipeModel>(r));
         }
 
         protected void ShowAddRecipe()

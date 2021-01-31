@@ -1,6 +1,10 @@
 ﻿@typeparam TEntity
 
-<MudTable Items="tableValues" SortLabel="Sort By">
+<MudTable 
+          Items="tableValues" 
+          SortLabel="Sort By" 
+          T="TableValue<TEntity>"
+          OnRowClick="OnRowClick">
     <HeaderContent>
         @foreach(var tableHeader in TableHeaders)
         {

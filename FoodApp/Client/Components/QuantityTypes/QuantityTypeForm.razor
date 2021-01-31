@@ -1,5 +1,15 @@
 ﻿
 
-<MudForm id="QuantityType_Form">
-
-</MudForm>
+<ModelForm 
+    Title="@(IsNew ? "Add New Quantity Type" : $"Editing {_quantityType.Type}")"
+    IsNew="IsNew"
+    OnCancel="Clear"
+    OnDelete="Delete"
+    OnSave="Save">
+    <MudTextField
+        Label="Description"
+        Placeholder="mL"
+        Required
+        @bind-Value="_quantityType.Type">
+    </MudTextField>
+</ModelForm>

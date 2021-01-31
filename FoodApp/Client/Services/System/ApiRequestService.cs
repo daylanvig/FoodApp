@@ -57,7 +57,8 @@ namespace FoodApp.Client.Services.System
         public async Task Delete<TEntity>(int id)
         {
             await _entityCache.InvalidateCache<TEntity>();
-            await _client.DeleteAsync($"/{EntityControllerMap.GetController<TEntity>()}/{id}");
+            var response = await _client.DeleteAsync($"/{EntityControllerMap.GetController<TEntity>()}/{id}");
+            response.EnsureSuccessStatusCode();
         }
 
         public Task<T> GetFromJsonAsync<T>(string url)

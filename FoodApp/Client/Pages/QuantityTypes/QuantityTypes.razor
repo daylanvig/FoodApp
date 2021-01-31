@@ -1,0 +1,20 @@
+﻿@page "/QuantityTypes"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+
+
+
+<FoodApp.Client.PageTemplates.ListPage Title="Quantity Types"
+                                       IsSaveVisible="false">
+    <Loader IsLoaded="@(_tableHeaders != null)">
+        <FoodApp.Client.Components.QuantityTypes.QuantityTypeForm @ref="_form" OnQuantityTypesChange="Update">
+        </FoodApp.Client.Components.QuantityTypes.QuantityTypeForm>
+        <MudDivider Class="mt-4 mb-4"></MudDivider>
+        <MudText Typo="Typo.subtitle1">Your Quantity Types</MudText>
+        <Table TableHeaders="_tableHeaders"
+               TableTemplates="_tableTemplates"
+               TableValues="_tableValues"
+               TEntity="FoodApp.Shared.Models.Foods.QuantityTypeModel"
+               OnClick="SetQuantityType">
+        </Table>
+    </Loader>
+</FoodApp.Client.PageTemplates.ListPage>

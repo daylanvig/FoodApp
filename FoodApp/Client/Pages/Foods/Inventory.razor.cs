@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Client.Pages.Foods
 {
+    /// <summary>
+    /// Inventory Page
+    /// </summary>
     public partial class Inventory : ComponentBase
     {
         [Inject]
@@ -16,6 +19,10 @@ namespace FoodApp.Client.Pages.Foods
         protected IReadOnlyList<FoodModel> foods;
         protected FoodModel Food = new();
 
+        /// <summary>
+        /// Load food items from server
+        /// </summary>
+        /// <returns></returns>
         protected async Task LoadFoodData()
         {
             foods = await ApiRequestService.GetList<FoodModel>();
