@@ -1,6 +1,7 @@
 ﻿using Core.Domain.Common;
 using FoodApp.Core.Domain.Foods;
 using FoodApp.Core.Domain.QuantityTypes;
+using FoodApp.Core.Domain.Recipes;
 using FoodApp.Core.Interfaces;
 using FoodApp.Data.Configurations.Foods;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,8 @@ namespace FoodApp.Data
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<QuantityType> QuantityTypes { get; set; }
+        public DbSet<RecipeStep> RecipeSteps { get; set; }
+
 
         public new DbSet<TEntity> Set<TEntity>() where TEntity: BaseEntity
         {

@@ -2,6 +2,7 @@
 using Core.Domain.Common;
 using FoodApp.Data;
 using System.Linq;
+using Tests.FoodApp.TestInfrastructure;
 using Xunit;
 
 namespace Tests.FoodApp.Core.Domain.Common
@@ -19,7 +20,7 @@ namespace Tests.FoodApp.Core.Domain.Common
             foreach (var baseEntity in baseEntityTypes)
             {
                 var property = properties.Where(p => p.PropertyType.GetGenericArguments()[0] == baseEntity);
-                Assert.Single(property);
+                CustomAssert.Single(property, baseEntity.FullName);
             }
         }
     }
