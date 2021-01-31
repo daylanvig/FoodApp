@@ -1,6 +1,7 @@
 ﻿using Core.Domain.Common;
 using FoodApp.Core.Common.Guards;
 using FoodApp.Core.Domain.Recipes;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -66,7 +67,6 @@ namespace FoodApp.Core.Domain.Foods
         private List<RecipeStep> _recipeSteps;
 
         #endregion
-
         #region Constructors
         /// <summary>
         /// Ctor - Required By EF
@@ -111,5 +111,27 @@ namespace FoodApp.Core.Domain.Foods
         }
         #endregion
 
+        #region PublicMethods
+        // todo -> Edit methods
+        public void UpdateIngredients(IEnumerable<RecipeIngredient> newIngredients)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateName(string newName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateUrl(string newUrl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateSteps(IEnumerable<RecipeStep> newSteps)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }

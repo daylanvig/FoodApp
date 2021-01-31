@@ -9,10 +9,19 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Server.Features.QuantityTypes
 {
+    /// <summary>
+    /// Create QuantityType Feature
+    /// </summary>
     public class Create
     {
+        /// <summary>
+        /// Create QuantityType Command
+        /// </summary>
         public record Command(string Type) : IRequest<QuantityTypeModel>;
 
+        /// <summary>
+        /// Create QuantityType Handler
+        /// </summary>
         public class Handler : IRequestHandler<Command, QuantityTypeModel>
         {
             private readonly IQuantityTypeService _quantityTypeService;
@@ -23,6 +32,13 @@ namespace FoodApp.Server.Features.QuantityTypes
                 _quantityTypeService = quantityTypeService;
                 _mapper = mapper;
             }
+
+            /// <summary>
+            /// Handle creating a quantity type
+            /// </summary>
+            /// <param name="request"></param>
+            /// <param name="cancellationToken"></param>
+            /// <returns></returns>
             public async Task<QuantityTypeModel> Handle(Command request, CancellationToken cancellationToken = default)
             {
                 Guard.AgainstNull(request, nameof(Command));
