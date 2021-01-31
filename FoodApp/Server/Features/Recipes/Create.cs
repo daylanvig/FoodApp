@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FoodApp.Core.Common;
+using FoodApp.Core.Common.Guards;
 using FoodApp.Core.Domain.Foods;
 using FoodApp.Core.Domain.Recipes;
 using FoodApp.Core.Interfaces;
@@ -15,10 +16,19 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Server.Features.Recipes
 {
+    /// <summary>
+    /// Create Recipe Feature
+    /// </summary>
     public class Create
     {
+        /// <summary>
+        /// Create Recipe Command
+        /// </summary>
         public record Command(string Name, IEnumerable<RecipeIngredientModel> Ingredients, string Url, IEnumerable<RecipeStepModel> Steps) : IRequest<RecipeModel>;
 
+        /// <summary>
+        /// Create Recipe Command Validator
+        /// </summary>
         public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
@@ -32,6 +42,9 @@ namespace FoodApp.Server.Features.Recipes
             }
         }
 
+        /// <summary>
+        /// Create Recipe Handler
+        /// </summary>
         public class Handler : IRequestHandler<Command, RecipeModel>
         {
             private readonly IRepository<Recipe> _recipeRepository;
@@ -48,14 +61,17 @@ namespace FoodApp.Server.Features.Recipes
                 _recipeIngredientService = recipeIngredientService;
             }
 
+            /// <summary>
+            /// Handle Creating a Recipe
+            /// </summary>
+            /// <param name="request"></param>
+            /// <param name="cancellationToken"></param>
+            /// <exception cref="ArgumentException">If recipe name is in use</exception>
+            /// <returns></returns>
             public async Task<RecipeModel> Handle(Command request, CancellationToken cancellationToken = default)
             {
                 // no duplicate recipe names
-                if ((await _recipeRepository.FindAsync(r => r.Name == request.Name)) != null)
-                {
-                    throw new ArgumentException("Recipe name in use", nameof(Command.Name));
-                }
-
+                Guard.ShouldBeNull(await _recipeRepository.FindAsync(r => r.Name == request.Name), nameof(Command.Name), "Recipe name is in use");
                 // Ensure all quantity types are created
                 var quantityTypes = await _quantityTypeService.EnsureCreatedAsync(request.Ingredients.Select(i => i.QuantityType));
 
@@ -71,7 +87,7 @@ namespace FoodApp.Server.Features.Recipes
                 
                 var recipe = Recipe.CreateNew(request.Name, recipeIngredients, request.Url, steps);
                 await _recipeRepository.AddAsync(recipe);
-
+                // todo -> add a mapping profile for this
                 return new RecipeModel
                 {
                     Id = recipe.Id,

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FoodApp.Core.Common.Guards
 {
     /// <summary>
-    /// NullGuards Partial
+    /// GuardPartial - Null Checks
     /// </summary>
     public static partial class Guard
     {
