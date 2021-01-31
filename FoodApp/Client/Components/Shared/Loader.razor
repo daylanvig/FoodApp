@@ -1,0 +1,12 @@
+﻿
+
+@if (IsLoaded)
+{
+    @ChildContent
+}
+else
+{
+    <div class="d-flex justify-center">
+        <MudProgressCircular Indeterminate Color="Color.Secondary" Size="@Size"></MudProgressCircular>
+    </div>
+}

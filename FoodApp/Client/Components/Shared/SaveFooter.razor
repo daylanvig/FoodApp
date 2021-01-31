@@ -1,13 +1,14 @@
 ﻿
 
 
-<div class="mt-4 d-flex justify-space-between">
+<div class="mt-4 d-flex justify-space-between save-footer">
     <div>
         @if (IsDeleteVisible)
         {
             <MudButton OnClick="OnDeleteClick"
                        Variant="Variant.Text"
-                       Color="Color.Secondary">
+                       Color="Color.Secondary"
+                       data-button-type="Delete">
                 Delete
             </MudButton>
         }
@@ -18,14 +19,16 @@
             <MudButton OnClick="OnCancelClick"
                        Variant="Variant.Text"
                        Color="Color.Secondary"
-                       Class="mr-3">
+                       Class="mr-3"
+                       data-button-type="Cancel">
                 Cancel
             </MudButton>
         }
         @if (IsSaveVisible) { 
             <MudButton OnClick="OnSaveClick"
                        Variant="Variant.Filled"
-                       Color="Color.Primary">
+                       Color="Color.Primary"
+                       data-button-type="Save">
                 @SaveLabel
             </MudButton>
         }

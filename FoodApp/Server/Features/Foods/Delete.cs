@@ -1,4 +1,4 @@
-﻿using FoodApp.Core.Common;
+﻿using FoodApp.Core.Common.Guards;
 using FoodApp.Core.Domain.Foods;
 using FoodApp.Core.Interfaces;
 using MediatR;
@@ -8,10 +8,19 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Server.Features.Foods
 {
+    /// <summary>
+    /// Delete Food Feature
+    /// </summary>
     public class Delete
     {
+        /// <summary>
+        /// DeleteFoodCommand
+        /// </summary>
         public record Command(int Id) : IRequest;
 
+        /// <summary>
+        /// Handler for deleting food
+        /// </summary>
         public class Handler : IRequestHandler<Command>
         {
             private readonly IRepository<Food> _foodRepository;
@@ -23,6 +32,12 @@ namespace FoodApp.Server.Features.Foods
                 _recipeIngredientRepository = recipeIngredientRepository;
             }
 
+            /// <summary>
+            /// Handle deleting food
+            /// </summary>
+            /// <param name="request"></param>
+            /// <param name="cancellationToken"></param>
+            /// <exception cref="FoodInUseException">If food is used in any recipes</exception>
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 var food = await _foodRepository.GetByIdAsync(request.Id);

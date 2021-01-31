@@ -2,6 +2,7 @@
 using FoodApp.Client.Services.System;
 using FoodApp.Client.Shared;
 using FoodApp.Core.Common;
+using FoodApp.Core.Common.Guards;
 using FoodApp.Shared.Models.Recipes;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Client.Components.Recipes
 {
-    public partial class RecipeForm: ComponentBase
+    public partial class RecipeForm : ComponentBase
     {
         #region Dependencies
         [Inject]
@@ -122,7 +123,7 @@ namespace FoodApp.Client.Components.Recipes
                 await ApiRequestService.Add(recipe);
                 // TODO -> navigate to edit page
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 SnackBar.Add($"Error saving: {e.Message}", Severity.Error);
             }

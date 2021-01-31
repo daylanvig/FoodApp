@@ -2,42 +2,16 @@
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 
 <FoodApp.Client.PageTemplates.ListPage Title="Recipes">
-    <MudSimpleTable>
-        <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (recipes == null)
-            {
-                <tr>
-                    <MudProgressCircular></MudProgressCircular>
-                </tr>
-            }
-            else if (recipes.Count == 0)
-            {
-                <tr>You don't have any recipes. <MudLink tabindex="0" @onclick="ShowAddRecipe">Add one now?</MudLink></tr>
-            }
-            else
-            {
-                @foreach (var recipe in recipes.OrderBy(r => r.Name))
-                {
-                    <tr>
-                        <td>@recipe.Name</td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </MudSimpleTable>
-    @if (recipes != null && recipes.Any())
-    {
+    <Loader IsLoaded="@(recipes != null)" Size="Size.Large">
+        <Table TableHeaders="tableHeaders"
+               TableTemplates="tableTemplates"
+               TableValues="tableValues">
+        </Table>
         <div class="d-flex justify-end mt-3">
             <MudButton ButtonType="ButtonType.Button"
-                        OnClick="ShowAddRecipe"
-                        Variant="Variant.Filled"
-                        Color="Color.Primary">Add Recipe</MudButton>
+                       OnClick="ShowAddRecipe"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary">Add Recipe</MudButton>
         </div>
-    }
-
+    </Loader>
 </FoodApp.Client.PageTemplates.ListPage>

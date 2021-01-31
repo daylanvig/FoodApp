@@ -136,13 +136,10 @@ namespace Tests.FoodApp.Client.Components.Foods
                 .ThrowsAsync(new Exception());
             var saveButton = GetSaveButton(Sut);
             // Act
-            saveButton.Click();
+            saveButton.ClickAndCatch();
             // Assert
             Assert.Equal(0, OnFoodsChangeCallbackInvokedCount);
         }
-
-
-
         #endregion
     }
 

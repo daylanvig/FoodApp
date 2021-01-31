@@ -1,14 +1,16 @@
 ﻿<MudForm @ref="form" id="Food_Form">
-    @if (IsNew())
-    {
-        <h2>Add New Food</h2>
+    @{ 
+        var label = IsNew() ? "Add New Food" : $"Editing {food.Name}";
     }
-    else
-    {
-        <h2>Edit @food.Name</h2>
-    }
+    <FoodApp.Client.Components.Shared.Elements.FormTitle Title="@label">
+    </FoodApp.Client.Components.Shared.Elements.FormTitle>
     <section aria-label="Food Form">
-        <MudTextField T="string" Label="Name" Required="true" @bind-Value="food.Name" name="Food.Name" />
+        <MudTextField 
+                      T="string" 
+                      Label="Name" 
+                      Required="true" 
+                      @bind-Value="food.Name" 
+                      name="Food.Name" />
         <div>
             <MudTextField T="decimal?"
                           Label="On Hand"
@@ -16,7 +18,7 @@
                           @bind-Value="food.AmountOnHand"
                           name="Food.AmountOnHand"
                           Format="F2" />
-            @*TODO: Replace this with an auto complete dropdown component with add support*@
+            @*FUTURE: Replace this with an auto complete dropdown component with add support*@
             <MudTextField Label="Units" Required="true" @bind-Value="food.QuantityType" name="Food.Units" />
         </div>
     </section>

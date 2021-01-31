@@ -2,7 +2,9 @@
 
 <MudContainer MaxWidth="MaxWidth.Medium">
     <MudText Typo="Typo.h1">@Title</MudText>
-    @ChildContent
+    <MudContainer>
+        @ChildContent
+    </MudContainer>
     <SaveFooter SaveLabel="@(SaveFooter.ADD_LABEL)"
                 OnSaveClick="OnAddClick"
                 IsSaveVisible="@IsSaveVisible">

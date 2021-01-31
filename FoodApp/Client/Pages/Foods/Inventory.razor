@@ -2,7 +2,10 @@
 @attribute [Microsoft.AspNetCore.Authorization.Authorize]
 
 <FoodApp.Client.PageTemplates.ListPage Title="Pantry" IsSaveVisible="false" >
-    <FoodApp.Client.Components.Foods.FoodForm Food="@Food" OnFoodsChange="@Update" @ref="FoodForm">
+    <FoodApp.Client.Components.Foods.FoodForm 
+                                              Food="@Food" 
+                                              OnFoodsChange="@Update" 
+                                              @ref="FoodForm">
     </FoodApp.Client.Components.Foods.FoodForm>
     <MudDivider Class="mt-4 mb-4"></MudDivider>
 

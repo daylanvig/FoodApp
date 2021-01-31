@@ -1,7 +1,6 @@
 ﻿@typeparam TEntity
-@typeparam TSortProp
 
-<MudTable Items="TableValues" SortLabel="Sort By">
+<MudTable Items="tableValues" SortLabel="Sort By">
     <HeaderContent>
         @foreach(var tableHeader in TableHeaders)
         {
@@ -11,9 +10,9 @@
         }
     </HeaderContent>
     <RowTemplate>
-        @foreach (var tableEntry in TableTemplates)
+        @foreach (var tableTemplate in TableTemplates)
         {
-            <MudTd DataLabel="@tableEntry.Label">@tableEntry.StringFormatter(context)</MudTd>
+            <MudTd DataLabel="@tableTemplate.Label">@tableTemplate.StringFormatter(context)</MudTd>
         }
     </RowTemplate>
 </MudTable>

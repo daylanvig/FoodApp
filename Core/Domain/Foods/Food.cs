@@ -1,34 +1,47 @@
 ﻿using Core;
 using Core.Domain.Common;
-using FoodApp.Core.Common;
+using FoodApp.Core.Common.Guards;
 using FoodApp.Core.Domain.QuantityTypes;
-using System;
-using System.Collections.Generic;
 
 namespace FoodApp.Core.Domain.Foods
 {
     /// <summary>
     /// Entity representing food
     /// </summary>
+    /// <remarks>
+    /// Food may be an item in someone's pantry, or it may be used as part of a recipe
+    /// </remarks>
     /// <seealso cref="Core.Domain.Common.BasePrivateEntity" />
     public class Food : BasePrivateEntity
     {
+        #region Properties
         public string Name { get; private set; }
         public decimal AmountOnHand { get; private set; }
         public QuantityType QuantityType { get; private set; }
-
+        #endregion
+        #region Constructors
+        /// <summary>
+        /// Parameterless ctor - Required by EF
+        /// </summary>
         public Food()
         {
             // todo -> add more to this once lists are added
         }
 
+        /// <summary>
+        /// Ctor - New Food
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="amountOnHand"></param>
+        /// <param name="quantityType"></param>
         private Food(string name, decimal amountOnHand, QuantityType quantityType) : this()
         {
             Name = name;
             AmountOnHand = amountOnHand;
             QuantityType = quantityType;
         }
-
+        #endregion
+        #region Static Methods
         /// <summary>
         /// Creates the new food item
         /// </summary>
@@ -39,7 +52,8 @@ namespace FoodApp.Core.Domain.Foods
         {
             return new Food(name, amountOnHand, quantityType);
         }
-
+        #endregion
+        #region Public Methods
         public void UpdateName(string name)
         {
             Guard.AgainstNullOrEmpty(name, GetPropertyIdentifier(nameof(name)));
@@ -71,11 +85,12 @@ namespace FoodApp.Core.Domain.Foods
             }
             AmountOnHand = newQuantity;
         }
-
-
+        #endregion
+        #region Helpers
         private string GetPropertyIdentifier(string property)
         {
             return $"{nameof(Food)} - {property}";
         }
+        #endregion
     }
 }

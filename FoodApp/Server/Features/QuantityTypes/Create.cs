@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FoodApp.Core.Common;
+using FoodApp.Core.Common.Guards;
 using FoodApp.Core.Domain.QuantityTypes;
 using FoodApp.Services.Foods;
 using FoodApp.Shared.Models.Foods;
