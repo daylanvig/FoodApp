@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Client.Components.Accounts
 {
-    public class LoginDisplayBase : ComponentBase
+    public partial class LoginDisplay : ComponentBase
     {
         [Inject] SignOutSessionStateManager SignoutManager { get; set; }
         [Inject] NavigationManager NavigationManager { get; set; }
