@@ -9,10 +9,19 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Server.Features.Foods
 {
+    /// <summary>
+    /// Load Food Detail Feature
+    /// </summary>
     public class Details
     {
+        /// <summary>
+        /// Load Food Details Query
+        /// </summary>
         public record Query(int Id) : IRequest<FoodModel>;
 
+        /// <summary>
+        /// Load Food Details Handler
+        /// </summary>
         public class Handler : IRequestHandler<Query, FoodModel>
         {
             private readonly IRepository<Food> _foodRepository;
@@ -24,6 +33,13 @@ namespace FoodApp.Server.Features.Foods
                 _mapper = mapper;
             }
 
+            /// <summary>
+            /// Handle loading Food
+            /// </summary>
+            /// <param name="request"></param>
+            /// <param name="cancellationToken"></param>
+            /// <returns>Loaded food</returns>
+            /// <exception cref="System.ArgumentException">Thrown if food with matching id is not found</exception>
             public async Task<FoodModel> Handle(Query request, CancellationToken cancellationToken = default)
             {
                 Food food = await _foodRepository.GetByIdAsync(request.Id, nameof(Food.QuantityType));

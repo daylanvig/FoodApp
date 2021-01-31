@@ -8,10 +8,19 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Server.Features.QuantityTypes
 {
+    /// <summary>
+    /// Delete QuantityType Feature
+    /// </summary>
     public class Delete
     {
+        /// <summary>
+        /// Delete QuantityType Command
+        /// </summary>
         public record Command(int Id) : IRequest;
 
+        /// <summary>
+        /// Delete QuantityType Handler
+        /// </summary>
         public class Handler : IRequestHandler<Command>
         {
             private readonly IRepository<QuantityType> _quantityTypeRepository;
@@ -21,6 +30,13 @@ namespace FoodApp.Server.Features.QuantityTypes
                 _quantityTypeRepository = quantityTypeRepository;
             }
 
+            /// <summary>
+            /// Handle deleting a quantity type
+            /// </summary>
+            /// <param name="request"></param>
+            /// <param name="cancellationToken"></param>
+            /// <exception cref="System.ArgumentException">Thrown if quantity type with id is not found</exception>
+            /// <exception cref="QuantityTypeInUseException">Thrown if any foods/recipes use the quantity type</exception>
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 var quantityType = await _quantityTypeRepository

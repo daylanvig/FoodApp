@@ -10,10 +10,19 @@ using System.Threading.Tasks;
 
 namespace FoodApp.Server.Features.Foods
 {
+    /// <summary>
+    /// Edit Food Feature
+    /// </summary>
     public class Edit
     {
+        /// <summary>
+        /// Edit Food Command
+        /// </summary>
         public record Command(int Id, string Name, decimal AmountOnHand, string QuantityType) : IRequest<FoodModel>;
 
+        /// <summary>
+        /// Edit Food Handler
+        /// </summary>
         public class EditFoodHandler : IRequestHandler<Command, FoodModel>
         {
             private readonly IRepository<Food> _foodRepository;
@@ -30,10 +39,16 @@ namespace FoodApp.Server.Features.Foods
                 _mapper = mapper;
             }
 
+            /// <summary>
+            /// Handle editing food
+            /// </summary>
+            /// <param name="command"></param>
+            /// <param name="cancellationToken"></param>
+            /// <returns></returns>
             public async Task<FoodModel> Handle(Command command, CancellationToken cancellationToken = default)
             {
                 // quantity type is updated independently
-                var quantityType = await _quantityTypeService.EnsureCreatedAsync(command.QuantityType);
+                await _quantityTypeService.EnsureCreatedAsync(command.QuantityType);
 
                 Food existingFood = await _foodRepository.GetByIdAsync(command.Id);
                 Guard.AgainstNull(existingFood, nameof(Command.Id), "Food not found");
