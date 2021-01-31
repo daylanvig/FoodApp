@@ -1,9 +1,9 @@
 ﻿<ModelForm 
-    Title="@(IsNew() ? "Add New Food" : $"Editing {_food.Name}")"
+    Title="@(IsNew ? "Add New Food" : $"Editing {_food.Name}")"
+    IsNew="@(IsNew)"
     OnSave="SaveFood"
     OnCancel="Clear"
-    OnDelete="DeleteFood"
-    IsNew="@(IsNew())">
+    OnDelete="DeleteFood">
         <MudTextField 
                 T="string"
                 Label="Name"

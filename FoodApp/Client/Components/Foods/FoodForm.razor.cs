@@ -43,16 +43,13 @@ namespace FoodApp.Client.Components.Foods
         }
         #endregion
         #region Helpers
-        protected bool IsNew()
-        {
-            return EntityModelHelper.IsNew(_food);
-        }
+        protected bool IsNew => EntityModelHelper.IsNew(_food);
         #endregion
         #region EventHandlers
         /// <summary>
         /// Clear the form
         /// </summary>
-        protected void Clear()
+        private void Clear()
         {
             _food = new();
         }
@@ -64,7 +61,7 @@ namespace FoodApp.Client.Components.Foods
         /// Deletes the food with the server and clears the form, notifying the parent.
         /// Fails if food is in use for any recipes
         /// </remarks>
-        protected async Task DeleteFood()
+        private async Task DeleteFood()
         {
             try
             {
@@ -88,7 +85,7 @@ namespace FoodApp.Client.Components.Foods
         /// If the food is a new food (id = 0), add is used. Else edit is used.
         /// On successful completion invokes <see cref="OnFoodsChange"/>
         /// </remarks>
-        protected async Task SaveFood()
+        private async Task SaveFood()
         {
             var foodName = _food.Name;
             try
