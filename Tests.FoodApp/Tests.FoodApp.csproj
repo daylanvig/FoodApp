@@ -14,7 +14,10 @@
     <PackageReference Include="AutoFixture" Version="4.15.0" />
     <PackageReference Include="AutoFixture.AutoMoq" Version="4.15.0" />
     <PackageReference Include="AutoFixture.Xunit2" Version="4.15.0" />
+    <PackageReference Include="bunit" Version="1.0.0-preview-01" />
+    <PackageReference Include="bunit.xunit" Version="1.0.0-preview-01" />
     <PackageReference Include="EfCore.TestSupport" Version="5.0.0-preview006" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
