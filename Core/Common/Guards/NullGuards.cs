@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace FoodApp.Core.Common
+namespace FoodApp.Core.Common.Guards
 {
-    public static class Guard
+    /// <summary>
+    /// NullGuards Partial
+    /// </summary>
+    public static partial class Guard
     {
         /// <summary>
         /// Check that value is not null
@@ -20,20 +25,6 @@ namespace FoodApp.Core.Common
         }
 
         /// <summary>
-        /// Againsts the value beingg null or empty
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="paramName">Name of the parameter.</param>
-        /// <exception cref="ArgumentException">Value is null or empty.</exception>
-        public static void AgainstNullOrEmpty(string value, string paramName)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                throw new ArgumentException("Value is null or empty.", paramName);
-            }
-        }
-
-        /// <summary>
         /// Check to ensure value is null
         /// </summary>
         /// <param name="value">The value.</param>
@@ -47,5 +38,6 @@ namespace FoodApp.Core.Common
                 throw new ArgumentException(message, paramName);
             }
         }
+
     }
 }
