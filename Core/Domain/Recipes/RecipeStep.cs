@@ -1,4 +1,4 @@
-﻿using Core.Domain.Common;
+﻿using FoodApp.Core.Domain.Common;
 
 namespace FoodApp.Core.Domain.Recipes
 {

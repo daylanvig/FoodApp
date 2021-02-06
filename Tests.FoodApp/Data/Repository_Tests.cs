@@ -1,5 +1,5 @@
 ﻿using AutoFixture.Xunit2;
-using Core.Domain.Common;
+using FoodApp.Core.Domain.Common;
 using FoodApp.Data;
 using FoodApp.Data.Repositories;
 using Microsoft.EntityFrameworkCore;

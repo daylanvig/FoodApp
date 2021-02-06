@@ -1,5 +1,5 @@
-﻿using Core.Domain.Common;
-using FoodApp.Core.Common.Guards;
+﻿using FoodApp.Core.Common.Guards;
+using FoodApp.Core.Domain.Common;
 using FoodApp.Core.Domain.Foods;
 using System.Collections.Generic;
 using System.Linq;

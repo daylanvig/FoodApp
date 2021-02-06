@@ -1,4 +1,4 @@
-﻿using Core.Domain.Common;
+﻿using FoodApp.Core.Domain.Common;
 using FoodApp.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;

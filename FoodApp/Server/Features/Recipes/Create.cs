@@ -49,16 +49,13 @@ namespace FoodApp.Server.Features.Recipes
         {
             private readonly IRepository<Recipe> _recipeRepository;
             private readonly IQuantityTypeService _quantityTypeService;
-            private readonly IRecipeIngredientService _recipeIngredientService;
 
             public Handler(
                 IRepository<Recipe> recipeRepository,
-                IQuantityTypeService quantityTypeService,
-                IRecipeIngredientService recipeIngredientService)
+                IQuantityTypeService quantityTypeService)
             {
                 _recipeRepository = recipeRepository;
                 _quantityTypeService = quantityTypeService;
-                _recipeIngredientService = recipeIngredientService;
             }
 
             /// <summary>
@@ -76,13 +73,7 @@ namespace FoodApp.Server.Features.Recipes
                 var quantityTypes = await _quantityTypeService.EnsureCreatedAsync(request.Ingredients.Select(i => i.QuantityType));
 
                 // Build list of ingredients
-                List<RecipeIngredient> recipeIngredients = new(request.Ingredients.Count());
-                foreach (var recipeIngredient in request.Ingredients)
-                {
-                    var quantityType = quantityTypes.Single(q => q.Type == recipeIngredient.QuantityType);
-                    recipeIngredients.Add(RecipeIngredient.CreateNew(recipeIngredient.FoodId, 0, recipeIngredient.Amount, quantityType.Id));
-                }
-
+                IEnumerable<RecipeIngredient> recipeIngredients = Utilities.CreateIngredients(quantityTypes, request.Ingredients, 0);
                 var steps = request.Steps.Select(s => RecipeStep.CreateNew(s.StepNumber, s.Direction));
                 
                 var recipe = Recipe.CreateNew(request.Name, recipeIngredients, request.Url, steps);

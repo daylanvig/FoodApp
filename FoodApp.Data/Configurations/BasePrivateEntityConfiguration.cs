@@ -1,7 +1,6 @@
-﻿using Core.Domain.Common;
+﻿using FoodApp.Core.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace FoodApp.Data.Configurations
 {

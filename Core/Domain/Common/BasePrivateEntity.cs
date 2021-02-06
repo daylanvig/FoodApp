@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Domain.Common
+namespace FoodApp.Core.Domain.Common
 {
     /// <summary>
     /// Entity belonging to one user

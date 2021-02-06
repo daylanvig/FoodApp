@@ -1,6 +1,5 @@
-﻿using Core.Domain.Common;
+﻿using FoodApp.Core.Domain.Common;
 using FoodApp.Core.Interfaces;
-using FoodApp.Data.Repositories;
 using Moq;
 using System;
 using System.Collections.Generic;

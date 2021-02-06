@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core
+namespace FoodApp.Core.Domain.Common
 {
     public class EntityIsNotCreatedException : Exception
     {

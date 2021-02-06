@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Domain.Common
+namespace FoodApp.Core.Domain.Common
 {
     /// <summary>
     /// General entity, shared between users

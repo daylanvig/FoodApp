@@ -1,5 +1,5 @@
-﻿using Core.Domain.Common;
-using FoodApp.Core.Common.Guards;
+﻿using FoodApp.Core.Common.Guards;
+using FoodApp.Core.Domain.Common;
 using FoodApp.Core.Domain.Recipes;
 using System;
 using System.Collections.Generic;
@@ -112,20 +112,54 @@ namespace FoodApp.Core.Domain.Foods
         #endregion
 
         #region PublicMethods
-        // todo -> Edit methods
+        /// <summary>
+        /// Update the recipe ingredients
+        /// </summary>
+        /// <exception cref="System.ArgumentException">Thrown if no ingredients in list</exception>
+        /// <exception cref="EntityIsNotCreatedException">If id is 0</exception>
+        /// <param name="newIngredients"></param>
         public void UpdateIngredients(IEnumerable<RecipeIngredient> newIngredients)
         {
-            throw new NotImplementedException();
+            Guard.HasMinimumLength(newIngredients, 1, nameof(RecipeIngredients));
+            IsCreated();
+            var ingredientList = newIngredients.ToList();
+            foreach (var ingredient in RecipeIngredients)
+            {
+                // if the food is only used once, it's referring to the same item so we can copy back the id from the existing ingredient
+                // otherwise we can't guarantee that the ingredient refers to the same food (since each food can be used multiple times), so we must always treat it as new
+                var ingredientsUsingFood = ingredientList.Where(i => i.FoodId == ingredient.FoodId);
+                if (ingredientsUsingFood.Count() == 1)
+                {
+                    var newIngredient = ingredientsUsingFood.Single();
+                    newIngredient.Id = ingredient.Id;
+                }
+            }
+            RecipeIngredients = ingredientList;
         }
 
+        /// <summary>
+        /// Update the recipe name
+        /// </summary>
+        /// <exception cref="System.ArgumentException">Thrown if name is null or empty</exception>
+        /// <exception cref="EntityIsNotCreatedException">If id is 0</exception>
+        /// <param name="newName"></param>
         public void UpdateName(string newName)
         {
-            throw new NotImplementedException();
+            Guard.AgainstNullOrEmpty(newName, nameof(Name));
+            IsCreated();
+            Name = newName;
         }
 
+        /// <summary>
+        /// Update recipe url
+        /// </summary>
+        /// <exception cref="EntityIsNotCreatedException">If id is 0</exception>
+        /// <param name="newUrl"></param>
         public void UpdateUrl(string newUrl)
         {
-            throw new NotImplementedException();
+            // because value is optional, no guard required yet. Might eventually want to guard url format
+            IsCreated();
+            Url = newUrl;
         }
 
         public void UpdateSteps(IEnumerable<RecipeStep> newSteps)

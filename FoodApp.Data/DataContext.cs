@@ -1,4 +1,4 @@
-﻿using Core.Domain.Common;
+﻿using FoodApp.Core.Domain.Common;
 using FoodApp.Core.Domain.Foods;
 using FoodApp.Core.Domain.QuantityTypes;
 using FoodApp.Core.Domain.Recipes;
@@ -26,7 +26,7 @@ namespace FoodApp.Data
         public DbSet<RecipeStep> RecipeSteps { get; set; }
 
 
-        public new DbSet<TEntity> Set<TEntity>() where TEntity: BaseEntity
+        public new DbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
         {
             return base.Set<TEntity>();
         }

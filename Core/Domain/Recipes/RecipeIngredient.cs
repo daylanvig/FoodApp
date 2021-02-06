@@ -1,4 +1,4 @@
-﻿using Core.Domain.Common;
+﻿using FoodApp.Core.Domain.Common;
 using FoodApp.Core.Domain.QuantityTypes;
 
 namespace FoodApp.Core.Domain.Foods

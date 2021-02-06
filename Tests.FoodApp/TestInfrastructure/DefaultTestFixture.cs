@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
 using AutoMapper;
-using Core.Domain.Common;
+using FoodApp.Core.Domain.Common;
 using FoodApp.Core.Interfaces;
 using Moq;
 

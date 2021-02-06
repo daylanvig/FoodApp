@@ -1,5 +1,4 @@
-﻿using Core.Domain.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using FoodApp.Core.Domain.Common;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodApp.Data.Configurations

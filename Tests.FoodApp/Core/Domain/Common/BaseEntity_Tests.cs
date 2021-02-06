@@ -1,5 +1,4 @@
-﻿using Core;
-using Core.Domain.Common;
+﻿using FoodApp.Core.Domain.Common;
 using FoodApp.Data;
 using System.Linq;
 using Tests.FoodApp.TestInfrastructure;
