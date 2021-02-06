@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Client\ClientTestHelpers\TestData\AllRecipes_AmishWhiteBread.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="..\FoodApp\Server\appsettings.json" Link="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Client\ClientTestHelpers\TestData\AllRecipes_AmishWhiteBread.html" />
   </ItemGroup>
 
   <ItemGroup>
