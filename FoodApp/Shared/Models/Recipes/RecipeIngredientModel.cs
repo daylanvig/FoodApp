@@ -7,9 +7,11 @@ namespace FoodApp.Shared.Models.Recipes
     {
         public int Id { get; set; }
         public int FoodId { get; set; }
+        public string FoodName { get; set; }
         [Range(0, double.MaxValue, ErrorMessage = "Value can not be negative")]
         public decimal Amount { get; set; }
         [Required]
         public string QuantityType { get; set; }
+        
     }
 }
